@@ -1,0 +1,208 @@
+/* About Page Specific Styles - Three Column Layout */
+
+/* Reset any inherited margins/padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure body and html don't have margins/padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Fix for nested main */
+.main-content > main {
+    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Content section styling */
+.about-content {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+    position: relative;
+    height: 100vh;
+    width: calc(100vw - 80px); /* Account for 80px sidebar */
+    overflow: hidden;
+}
+
+/* Three column grid container */
+.about-columns-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    height: 100vh;
+    width: calc(100vw - 80px); /* Account for 80px sidebar */
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual column styling */
+.about-column {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Default background images for each column */
+.about-column.origin {
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.about-column.vision {
+    background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+}
+
+.about-column.mission {
+    background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');
+}
+
+/* Dark overlay that appears on hover */
+.about-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.about-column:hover::before {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Column text styling */
+.about-column-text {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+    opacity: 0.8;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+/* Text animation on hover */
+.about-column:hover .about-column-text {
+    opacity: 1;
+    transform: translateY(0);
+    font-size: 2.8rem;
+}
+
+/* Optional: Add a subtle border between columns */
+.about-column:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    bottom: 10%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 3;
+}
+
+/* Override any default main-content styles that might be causing issues */
+.main-content {
+    margin: 0 !important; /* Remove the default 80px left margin */
+    margin-left: 80px !important; /* Add it back specifically for sidebar spacing */
+    padding: 0 !important;
+    width: calc(100vw - 80px) !important; /* Make sure it accounts for sidebar */
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .about-content {
+        width: calc(100vw - 60px); /* Account for smaller 60px sidebar */
+    }
+    
+    .about-columns-container {
+        width: calc(100vw - 60px); /* Account for smaller 60px sidebar */
+        grid-template-columns: 1fr;
+        height: 100vh;
+        gap: 0;
+    }
+    
+    .main-content {
+        margin-left: 60px !important; /* Adjust for smaller sidebar */
+        width: calc(100vw - 60px) !important;
+    }
+    
+    .about-column {
+        height: calc(100vh / 3);
+        min-height: calc(100vh / 3);
+    }
+    
+    .about-column-text {
+        font-size: 2rem;
+    }
+    
+    .about-column:hover .about-column-text {
+        font-size: 2.2rem;
+    }
+    
+    .about-column:not(:last-child)::after {
+        display: none;
+    }
+    
+    .about-content {
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        width: calc(100vw - 60px); /* Keep accounting for sidebar on mobile */
+    }
+    
+    .about-columns-container {
+        width: calc(100vw - 60px);
+        grid-template-columns: 1fr;
+        height: 100vh;
+        gap: 0;
+    }
+    
+    .main-content {
+        margin-left: 60px !important;
+        width: calc(100vw - 60px) !important;
+    }
+    
+    .about-column {
+        height: calc(100vh / 3);
+        min-height: calc(100vh / 3);
+    }
+    
+    .about-column-text {
+        font-size: 1.8rem;
+    }
+    
+    .about-column:hover .about-column-text {
+        font-size: 2rem;
+    }
+}
