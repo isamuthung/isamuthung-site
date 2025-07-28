@@ -1,0 +1,210 @@
+/* Vision Page Specific Styles */
+
+.vision-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeInContainer 1s ease-out 0.5s forwards;
+    box-sizing: border-box;
+}
+
+@keyframes fadeInContainer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vision-section {
+    margin-bottom: 60px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInSection 0.8s ease-out forwards;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.vision-section:nth-child(1) .vision-header {
+    animation-delay: 0.6s;
+}
+
+.vision-section:nth-child(2) .vision-header {
+    animation-delay: 1.0s;
+}
+
+.vision-section:nth-child(3) .vision-header {
+    animation-delay: 1.4s;
+}
+
+@keyframes slideUpHeader {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInSection {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vision-header {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #333333;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpHeader 1.2s ease-out forwards;
+}
+
+.vision-header::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333333;
+    transition: width 0.4s ease;
+}
+
+.vision-header:hover::after {
+    width: 100%;
+}
+
+.vision-section:nth-child(1) {
+    animation-delay: 0.8s;
+}
+
+.vision-section:nth-child(2) {
+    animation-delay: 1.2s;
+}
+
+.vision-section:nth-child(3) {
+    animation-delay: 1.6s;
+}
+
+.vision-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #555555;
+    max-width: 750px;
+    margin: 0 auto;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.vision-text:hover {
+    color: #333333;
+}
+
+/* Hover effects for sections */
+.vision-section:hover {
+    transform: scale(1.02);
+}
+
+.vision-section:not(:hover) {
+    transform: scale(0.98);
+    opacity: 0.7;
+}
+
+/* When any section is hovered, others shrink slightly */
+.vision-container:hover .vision-section:not(:hover) {
+    transform: scale(0.98);
+    opacity: 0.7;
+}
+
+.vision-container:hover .vision-section:hover {
+    transform: scale(1.02);
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vision-container {
+        padding: 30px;
+        height: 100vh;
+    }
+    
+    .vision-header {
+        font-size: 1.8rem;
+    }
+    
+    .vision-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .vision-section {
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vision-container {
+        padding: 20px;
+    }
+    
+    .vision-header {
+        font-size: 1.5rem;
+    }
+    
+    .vision-text {
+        font-size: 0.95rem;
+    }
+    
+    .vision-section {
+        margin-bottom: 40px;
+    }
+}
+
+/* Ensure main content doesn't interfere with sidebar */
+.main-content {
+    overflow: hidden;
+}
+
+/* Word animation effect */
+.word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: wordFadeIn 0.6s ease-out forwards;
+}
+
+@keyframes wordFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
