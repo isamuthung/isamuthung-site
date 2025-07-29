@@ -60,12 +60,25 @@ body, html {
     margin: 0;
     padding: 0;
     
+    /* Remove link styling */
+    text-decoration: none;
+    color: inherit;
+    
     /* Initial state - hidden and slightly moved */
     opacity: 0;
     transform: translateY(30px);
     
     /* Animation properties */
     animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Ensure no underlines on hover or focus */
+.about-column:hover,
+.about-column:focus,
+.about-column:active,
+.about-column:visited {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Staggered animation delays */
