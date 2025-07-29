@@ -170,6 +170,15 @@
     overflow: hidden;
 }
 
+/* Disable pointer events during animations */
+.vision-container.animating {
+    pointer-events: none;
+}
+
+.vision-container.animating * {
+    pointer-events: none;
+}
+
 /* Word animation effect */
 .word {
     display: inline-block;

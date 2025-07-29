@@ -6,19 +6,32 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function initializeVisionPage() {
-    // Animate words in vision text
-    animateWords();
+    const visionContainer = document.querySelector('.vision-container');
     
-    // Add hover effects to vision sections
+    // Disable pointer events during animations
+    if (visionContainer) {
+        visionContainer.classList.add('animating');
+    }
+    
+    // Skip word animation to prevent dipping effect
+    // animateWords();
+    
+    // Add simplified hover effects
     addHoverEffects();
     
     // Ensure scroll is locked initially for animations
     document.body.classList.add('scroll-locked');
     
-    // Unlock scroll after all animations complete
+    // Calculate total animation time: container delay (0.1s) + container duration (1s) + last section delay (1.6s) + section duration (0.8s) = 3.5s
+    const totalAnimationTime = 3500;
+    
+    // Unlock scroll and enable pointer events after all animations complete
     setTimeout(() => {
         document.body.classList.remove('scroll-locked');
-    }, 1500); // Reduced from 3000ms
+        if (visionContainer) {
+            visionContainer.classList.remove('animating');
+        }
+    }, totalAnimationTime);
 }
 
 function animateWords() {
@@ -38,8 +51,8 @@ function animateWords() {
             wordSpan.classList.add('word');
             
             // Calculate delay based on section and word position
-            const baseDelay = (sectionIndex * 200) + 400; // Section stagger - reduced
-            const wordDelay = wordIndex * 30; // Word stagger within section - reduced
+            const baseDelay = (sectionIndex * 200) + 1200; // Start after section animations
+            const wordDelay = wordIndex * 30;
             wordSpan.style.animationDelay = `${baseDelay + wordDelay}ms`;
             
             textElement.appendChild(wordSpan);
@@ -56,29 +69,33 @@ function addHoverEffects() {
     const visionSections = document.querySelectorAll('.vision-section');
     
     visionSections.forEach(section => {
-        // Add click effect for mobile
-        section.addEventListener('click', () => {
-            section.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                section.style.transform = 'scale(1.02)';
-            }, 100);
-            setTimeout(() => {
-                section.style.transform = 'scale(1)';
-            }, 300);
+        // Simplified mobile touch effect that doesn't conflict with CSS animations
+        section.addEventListener('click', (e) => {
+            // Only apply on mobile/touch devices and after animations complete
+            if ('ontouchstart' in window && !document.querySelector('.vision-container').classList.contains('animating')) {
+                // Temporarily add a class for the touch effect
+                section.classList.add('touch-effect');
+                
+                // Remove the class after animation
+                setTimeout(() => {
+                    section.classList.remove('touch-effect');
+                }, 300);
+            }
         });
     });
 }
 
-// Add subtle parallax effect on scroll (if needed in future)
-function addParallaxEffect() {
-    const visionSections = document.querySelectorAll('.vision-section');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        
-        visionSections.forEach((section, index) => {
-            const rate = scrolled * -0.1 * (index + 1);
-            section.style.transform = `translateY(${rate}px)`;
-        });
-    });
+// Add CSS for touch effect via JavaScript (alternative approach)
+function addTouchEffectStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .vision-section.touch-effect {
+            transform: translateY(-1px) !important;
+            transition: transform 0.15s ease;
+        }
+    `;
+    document.head.appendChild(style);
 }
+
+// Initialize touch styles
+document.addEventListener('DOMContentLoaded', addTouchEffectStyles);
