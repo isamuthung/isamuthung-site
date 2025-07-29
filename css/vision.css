@@ -10,7 +10,7 @@
     max-width: 1000px;
     margin: 0 auto;
     opacity: 0;
-    animation: fadeInContainer 1s ease-out 0.5s forwards;
+    animation: fadeInContainer 1s ease-out 0.1s forwards;
     box-sizing: border-box;
 }
 
@@ -31,31 +31,8 @@
     opacity: 0;
     transform: translateY(40px);
     animation: fadeInSection 0.8s ease-out forwards;
-    transition: all 0.3s ease;
     flex-shrink: 0;
-}
-
-.vision-section:nth-child(1) .vision-header {
-    animation-delay: 1s;
-}
-
-.vision-section:nth-child(2) .vision-header {
-    animation-delay: 1.3s;
-}
-
-.vision-section:nth-child(3) .vision-header {
-    animation-delay: 1.6s;
-}
-
-@keyframes slideUpSimple {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    /* Remove conflicting transition that interferes with animations */
 }
 
 @keyframes fadeInSection {
@@ -79,10 +56,7 @@
     letter-spacing: 0.5px;
     position: relative;
     display: inline-block;
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideUpSimple 1s ease-out forwards;
+    transition: color 0.3s ease;
 }
 
 .vision-header::after {
@@ -129,24 +103,21 @@
     color: #333333;
 }
 
-/* Hover effects for sections */
+/* Simplified hover effects that don't interfere with animations */
+.vision-section {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
 .vision-section:hover {
-    transform: scale(1.02);
+    transform: translateY(-2px); /* Subtle lift instead of scale */
 }
 
-.vision-section:not(:hover) {
-    transform: scale(0.98);
-    opacity: 0.7;
-}
-
-/* When any section is hovered, others shrink slightly */
+/* Remove the complex hover system that was causing conflicts */
 .vision-container:hover .vision-section:not(:hover) {
-    transform: scale(0.98);
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .vision-container:hover .vision-section:hover {
-    transform: scale(1.02);
     opacity: 1;
 }
 
@@ -168,6 +139,11 @@
     
     .vision-section {
         margin-bottom: 40px;
+    }
+    
+    /* Disable hover effects on mobile to prevent issues */
+    .vision-section:hover {
+        transform: none;
     }
 }
 

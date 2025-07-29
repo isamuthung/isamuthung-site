@@ -59,19 +59,41 @@ body, html {
     height: 100vh;
     margin: 0;
     padding: 0;
+    
+    /* Initial state - hidden and slightly moved */
+    opacity: 0;
+    transform: translateY(30px);
+    
+    /* Animation properties */
+    animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Default background images for each column */
+/* Staggered animation delays */
 .about-column.origin {
     background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    animation-delay: 0.1s;
 }
 
 .about-column.vision {
     background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    animation-delay: 0.3s;
 }
 
 .about-column.mission {
     background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');
+    animation-delay: 0.5s;
+}
+
+/* Keyframe animation for slide in effect */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Dark overlay that appears on hover */

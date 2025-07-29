@@ -18,7 +18,7 @@ function initializeVisionPage() {
     // Unlock scroll after all animations complete
     setTimeout(() => {
         document.body.classList.remove('scroll-locked');
-    }, 3000);
+    }, 1500); // Reduced from 3000ms
 }
 
 function animateWords() {
@@ -38,8 +38,8 @@ function animateWords() {
             wordSpan.classList.add('word');
             
             // Calculate delay based on section and word position
-            const baseDelay = (sectionIndex * 400) + 1000; // Section stagger
-            const wordDelay = wordIndex * 50; // Word stagger within section
+            const baseDelay = (sectionIndex * 200) + 400; // Section stagger - reduced
+            const wordDelay = wordIndex * 30; // Word stagger within section - reduced
             wordSpan.style.animationDelay = `${baseDelay + wordDelay}ms`;
             
             textElement.appendChild(wordSpan);
