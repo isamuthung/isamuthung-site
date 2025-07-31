@@ -329,3 +329,239 @@
             height: 100vh;
             overflow-y: auto;
         }
+
+/* ===== COMING SOON PAGE STYLES ===== */
+
+.coming-soon-body {
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.coming-soon-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+    position: relative;
+}
+
+.coming-soon-container {
+    text-align: center;
+    position: relative;
+}
+
+/* Main Coming Soon Text */
+.coming-soon-text {
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.coming-soon-full {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 10vw, 7rem);
+    color: #333333;
+    display: inline-block;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: riseIn 2s ease-out 0.5s both;
+    position: relative;
+    z-index: 2;
+    padding: 0.3em 0.5em;
+}
+
+/* Animated border rectangle */
+.text-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.text-border::before,
+.text-border::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 2px solid #333333;
+    animation: drawBorder 3s ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+.text-border::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+.text-border::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+@keyframes riseIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes drawBorder {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    25% {
+        width: 100%;
+        height: 0;
+    }
+    50% {
+        width: 100%;
+        height: 100%;
+    }
+    75% {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}
+
+/* Alternative simpler border method */
+.text-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    border: 2px solid transparent;
+    animation: traceBorder 4s ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+@keyframes traceBorder {
+    0%, 90%, 100% {
+        border-color: transparent;
+        opacity: 0;
+    }
+    5% {
+        border-top-color: #333333;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        opacity: 1;
+    }
+    25% {
+        border-top-color: #333333;
+        border-right-color: #333333;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        opacity: 1;
+    }
+    50% {
+        border-top-color: #333333;
+        border-right-color: #333333;
+        border-bottom-color: #333333;
+        border-left-color: transparent;
+        opacity: 1;
+    }
+    75% {
+        border-top-color: #333333;
+        border-right-color: #333333;
+        border-bottom-color: #333333;
+        border-left-color: #333333;
+        opacity: 1;
+    }
+    85% {
+        border-color: #333333;
+        opacity: 1;
+    }
+}
+
+/* Loading Dots */
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    animation: riseIn 1.5s ease-out 2s both;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #333333;
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .coming-soon-full {
+        font-size: clamp(2.5rem, 12vw, 5rem);
+        padding: 0.2em 0.4em;
+    }
+    
+    .text-border {
+        border-width: 1.5px;
+    }
+    
+    .coming-soon-text {
+        margin-bottom: 2rem;
+    }
+    
+    .loading-dots {
+        gap: 10px;
+    }
+    
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .coming-soon-container {
+        padding: 0 1rem;
+    }
+    
+    .coming-soon-text {
+        margin-bottom: 1.5rem;
+    }
+    
+    .text-border {
+        border-width: 1px;
+    }
+    
+    .coming-soon-full {
+        padding: 0.15em 0.3em;
+    }
+    
+    .loading-dots {
+        gap: 8px;
+    }
+}
+
