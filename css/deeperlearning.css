@@ -1,0 +1,359 @@
+/* Deeper Learning Specific Styles */
+
+/* Override main content for this page */
+.deeper-learning-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 40px 60px 40px;
+    line-height: 1.7;
+    color: #333333;
+}
+
+/* Custom scrollbar - hidden but functional */
+.main-content::-webkit-scrollbar {
+    display: none;
+}
+
+.main-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 80px 0 60px 0;
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: -1px;
+    text-transform: none;
+    opacity: 0;
+    animation: fadeInTitle 1.2s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Content Sections */
+.content-section {
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeInContent 0.8s ease-out forwards;
+}
+
+.content-section:nth-child(2) { animation-delay: 0.6s; }
+.content-section:nth-child(4) { animation-delay: 0.8s; }
+.content-section:nth-child(6) { animation-delay: 1.0s; }
+.content-section:nth-child(8) { animation-delay: 1.2s; }
+.content-section:nth-child(10) { animation-delay: 1.4s; }
+.content-section:nth-child(12) { animation-delay: 1.6s; }
+.content-section:nth-child(14) { animation-delay: 1.8s; }
+.content-section:nth-child(16) { animation-delay: 2.0s; }
+.content-section:nth-child(18) { animation-delay: 2.2s; }
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography */
+.content-section p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #333333;
+}
+
+.opening-paragraph {
+    font-size: 1.25rem !important;
+    font-weight: 400;
+    line-height: 1.9;
+    color: #2c2c2c;
+    margin-bottom: 2rem;
+}
+
+.closing-paragraph {
+    font-size: 1.2rem !important;
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+    color: #1a1a1a;
+    margin-top: 2rem;
+}
+
+.closing {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #eaeaea;
+}
+
+/* Emphasis */
+em {
+    font-style: italic;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+/* Photo Containers */
+.photo-container {
+    margin: 60px 0;
+    opacity: 0;
+    animation: fadeInPhoto 0.8s ease-out forwards;
+    clear: both;
+}
+
+/* Vertical/Portrait Images - Float to one side with text wrap */
+.photo-container[data-orientation="vertical"] {
+    float: left;
+    width: 350px;
+    margin: 0 40px 30px 0;
+    clear: none;
+}
+
+.photo-container[data-orientation="vertical"]:nth-of-type(even) {
+    float: right;
+    margin: 0 0 30px 40px;
+}
+
+/* Horizontal/Landscape Images - Full width, no text wrap */
+.photo-container[data-orientation="horizontal"] {
+    width: 100%;
+    text-align: center;
+    float: none;
+    margin: 60px 0;
+    clear: both;
+}
+
+/* Default styling for images without orientation set */
+.photo-container:not([data-orientation]) {
+    width: 100%;
+    text-align: center;
+    float: none;
+    margin: 60px 0;
+    clear: both;
+}
+
+.photo-container:nth-of-type(3) { animation-delay: 0.7s; }
+.photo-container:nth-of-type(5) { animation-delay: 0.9s; }
+.photo-container:nth-of-type(7) { animation-delay: 1.1s; }
+.photo-container:nth-of-type(9) { animation-delay: 1.3s; }
+.photo-container:nth-of-type(11) { animation-delay: 1.5s; }
+.photo-container:nth-of-type(13) { animation-delay: 1.7s; }
+.photo-container:nth-of-type(15) { animation-delay: 1.9s; }
+
+@keyframes fadeInPhoto {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Photo Placeholders */
+.photo-placeholder {
+    width: 100%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px dashed #adb5bd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Vertical image placeholder */
+.photo-container[data-orientation="vertical"] .photo-placeholder {
+    height: 450px;
+    aspect-ratio: 3/4;
+}
+
+/* Horizontal image placeholder */
+.photo-container[data-orientation="horizontal"] .photo-placeholder {
+    height: 400px;
+    aspect-ratio: 4/3;
+}
+
+/* Default placeholder (horizontal) */
+.photo-container:not([data-orientation]) .photo-placeholder {
+    height: 400px;
+    aspect-ratio: 4/3;
+}
+
+.photo-placeholder:hover {
+    border-color: #6c757d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.photo-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #6c757d;
+    z-index: 1;
+    position: relative;
+}
+
+/* Photo Captions */
+.photo-caption {
+    margin-top: 15px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #666666;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+/* Caption positioning for vertical images */
+.photo-container[data-orientation="vertical"] .photo-caption {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Caption positioning for horizontal images */
+.photo-container[data-orientation="horizontal"] .photo-caption {
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .deeper-learning-content {
+        padding: 0 30px 60px 30px;
+    }
+    
+    .hero-title {
+        font-size: 3.8rem;
+    }
+    
+    .photo-placeholder {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .deeper-learning-content {
+        padding: 0 20px 40px 20px;
+    }
+    
+    .hero-section {
+        padding: 60px 0 40px 0;
+        margin-bottom: 30px;
+    }
+    
+    .hero-title {
+        font-size: 3.2rem;
+        letter-spacing: -0.5px;
+    }
+    
+    .content-section p,
+    .opening-paragraph {
+        font-size: 1.05rem !important;
+        line-height: 1.7;
+    }
+    
+    .closing-paragraph {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Mobile: All photos become full width */
+    .photo-container,
+    .photo-container[data-orientation="vertical"],
+    .photo-container[data-orientation="horizontal"] {
+        float: none !important;
+        width: 100% !important;
+        margin: 40px 0 !important;
+        text-alignment: center;
+        clear: both;
+    }
+    
+    .photo-container[data-orientation="vertical"] .photo-placeholder {
+        height: 350px;
+        aspect-ratio: 3/4;
+    }
+    
+    .photo-container[data-orientation="horizontal"] .photo-placeholder,
+    .photo-container:not([data-orientation]) .photo-placeholder {
+        height: 280px;
+        aspect-ratio: 4/3;
+    }
+    
+    .photo-caption {
+        text-align: center !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .content-section {
+        margin-bottom: 35px;
+        clear: both;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .deeper-learning-content {
+        padding: 0 15px 40px 15px;
+    }
+    
+    .photo-container[data-orientation="vertical"] .photo-placeholder {
+        height: 300px;
+    }
+    
+    .photo-container[data-orientation="horizontal"] .photo-placeholder,
+    .photo-container:not([data-orientation]) .photo-placeholder {
+        height: 240px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .photo-placeholder {
+        height: 300px;
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+    }
+    
+    .hero-title {
+        color: #000;
+    }
+}
