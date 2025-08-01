@@ -1,11 +1,11 @@
 /* Portfolio Grid Layout */
 .portfolio-container {
-    width: calc(100% - 80px);
-    margin-left: 80px;
+    width: 100%;
+    margin-left: 0;
     padding: 0;
     max-width: 100%;
     height: 100vh;
-    overflow: hidden; /* Prevent scrollbars during animation */
+    overflow: hidden; /* Prevent scrollbars during animation - will be overridden on mobile */
 }
 
 /* Main Grid Layout: 40% left, 60% right */
@@ -143,18 +143,57 @@
 }
 
 /* Portfolio Grid Responsive Design */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+    .portfolio-container {
+        width: 100%;
+        margin-left: 0;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .portfolio-grid {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .portfolio-title {
+        font-size: 1.4rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* Tablets - Enable scrolling and adjust layout */
 @media (max-width: 768px) {
+    .portfolio-container {
+        width: 100%;
+        margin-left: 0;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto; /* Enable scrolling */
+        padding: 20px 10px;
+    }
+
     .portfolio-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 15px;
+        height: auto;
+        min-height: calc(100vh - 40px);
     }
 
     .left-grid {
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 200px);
+        height: auto;
+        gap: 15px;
     }
 
     .right-grid {
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 200px);
+        height: auto;
+        gap: 15px;
     }
 
     .merged-l1-l12 {
@@ -174,25 +213,46 @@
     }
 
     .portfolio-title {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        padding: 0.7rem 1.2rem;
+    }
+
+    .portfolio-item {
+        min-height: 200px;
     }
 }
 
+/* Mobile phones - Stack everything vertically */
 @media (max-width: 480px) {
+    .portfolio-container {
+        width: 100%;
+        margin-left: 0;
+        height: auto;
+        overflow-y: auto;
+        padding: 15px 8px;
+    }
+
     .portfolio-grid {
+        grid-template-columns: 1fr;
         grid-template-rows: auto;
+        gap: 12px;
+        height: auto;
     }
 
     .left-grid,
     .right-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(auto-fit, 150px);
+        grid-template-rows: auto;
+        gap: 12px;
+        height: auto;
     }
 
     .portfolio-item {
-        height: 150px;
+        height: 180px;
+        min-height: 180px;
     }
 
+    /* Reset all merged cell styles for mobile */
     .merged-l1-l12,
     .merged-l14-l15,
     .merged-r1-r2,
@@ -203,5 +263,44 @@
 
     .portfolio-title {
         font-size: 1.2rem;
+        padding: 0.6rem 1rem;
+    }
+
+    /* Hover effects work differently on mobile, so show titles by default */
+    .portfolio-title {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+
+    .portfolio-overlay {
+        opacity: 0.3;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .portfolio-container {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 5px;
+    }
+
+    .portfolio-grid {
+        gap: 8px;
+    }
+
+    .left-grid,
+    .right-grid {
+        gap: 8px;
+    }
+
+    .portfolio-item {
+        height: 160px;
+        min-height: 160px;
+    }
+
+    .portfolio-title {
+        font-size: 1.1rem;
+        padding: 0.5rem 0.8rem;
     }
 }
