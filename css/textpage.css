@@ -44,30 +44,34 @@ body.textpage-body.scroll-locked {
     height: auto !important;
 }
 
-/* Override default main positioning for text pages */
-main {
+/* Override default main positioning for text pages - HIGHER SPECIFICITY */
+body.textpage-body main,
+.textpage-body main {
     margin-left: var(--sidebar-width, 80px) !important;
     padding: 0 !important;
     height: auto !important;
     overflow-y: visible !important;
     width: calc(100vw - var(--sidebar-width, 80px)) !important;
-    box-sizing: border-box;
-    min-height: 100vh;
+    box-sizing: border-box !important;
+    min-height: 100vh !important;
 }
 
-/* Force main to be scrollable on text pages */
+/* Force main to be scrollable on text pages - HIGHER SPECIFICITY */
+body.textpage-body main,
 .textpage-body main {
     overflow-y: visible !important;
     height: auto !important;
 }
 
+body.textpage-body.scroll-locked main,
 .textpage-body.scroll-locked main {
     overflow-y: visible !important;
     height: auto !important;
 }
 
-/* Main content container - positioned to work with sidebar */
-.main-content {
+/* Main content container - positioned to work with sidebar - HIGHER SPECIFICITY */
+body.textpage-body .main-content,
+.textpage-body .main-content {
     max-width: 650px;
     margin: 60px auto 120px auto;
     padding: 40px;
@@ -76,8 +80,10 @@ main {
     color: #2c2c2c;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400;
-    width: calc(100% - 80px);
+    width: calc(100% - 160px); /* Reduced width to account for sidebar */
     box-sizing: border-box;
+    margin-left: 180px !important; /* Center the content with left offset */
+    margin-right: auto;
 }
 
 /* Page Header Styles */
@@ -158,24 +164,33 @@ main {
     outline: none;
 }
 
-/* Responsive adjustments for text pages */
+/* Responsive adjustments for text pages - HIGHER SPECIFICITY */
 @media (max-width: 1024px) {
-    main {
+    body.textpage-body main,
+    .textpage-body main {
         margin-left: var(--sidebar-width, 60px) !important;
         width: calc(100vw - var(--sidebar-width, 60px)) !important;
+    }
+    
+    body.textpage-body .main-content,
+    .textpage-body .main-content {
+        margin-left: 120px !important;
+        width: calc(100% - 140px);
     }
 }
 
 @media (max-width: 768px) {
-    main {
+    body.textpage-body main,
+    .textpage-body main {
         margin-left: var(--sidebar-width, 50px) !important;
         width: calc(100vw - var(--sidebar-width, 50px)) !important;
     }
     
-    .main-content {
+    body.textpage-body .main-content,
+    .textpage-body .main-content {
         max-width: 600px;
-        width: calc(100% - 48px);
-        margin: 40px auto 80px auto;
+        width: calc(100% - 100px);
+        margin: 40px auto 80px 100px !important;
         padding: 30px 24px;
         font-size: 15px;
     }
@@ -207,14 +222,16 @@ main {
 }
 
 @media (max-width: 480px) {
-    main {
+    body.textpage-body main,
+    .textpage-body main {
         margin-left: var(--sidebar-width, 45px) !important;
         width: calc(100vw - var(--sidebar-width, 45px)) !important;
     }
     
-    .main-content {
-        width: calc(100% - 40px);
-        margin: 30px auto 60px auto;
+    body.textpage-body .main-content,
+    .textpage-body .main-content {
+        width: calc(100% - 80px);
+        margin: 30px auto 60px 70px !important;
         padding: 20px;
         font-size: 14px;
     }
@@ -239,9 +256,16 @@ main {
 }
 
 @media (max-width: 360px) {
-    main {
+    body.textpage-body main,
+    .textpage-body main {
         margin-left: var(--sidebar-width, 40px) !important;
         width: calc(100vw - var(--sidebar-width, 40px)) !important;
+    }
+    
+    body.textpage-body .main-content,
+    .textpage-body .main-content {
+        margin-left: 60px !important;
+        width: calc(100% - 70px);
     }
 }
 
@@ -279,5 +303,11 @@ main {
     .page-content {
         animation: none !important;
         opacity: 1 !important;
+    }
+    
+    /* Remove left margins in print for better use of space */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
     }
 }
