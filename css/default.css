@@ -64,7 +64,7 @@ main {
     --secondary-text-color: #333333;
     --accent-color: #ffffff;
     --transition-speed: 0.3s;
-    --contact-link-font: 'Playfair Display', cursive;
+    --contact-link-font: 'Playfair Display'; 
     --contact-link-color: #f4f4f4;
     --contact-link-hover-color: #ffffff;
     --sidebar-width: 80px;
@@ -258,7 +258,6 @@ main {
     font-family: var(--contact-link-font);
     font-size: 2.2rem;
     font-weight: 400;
-    font-style: italic;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     position: relative;
