@@ -83,17 +83,17 @@ body, html {
 
 /* Staggered animation delays */
 .about-column.origin {
-    background-image: url('/images/origin.jpg');
+    background-image: url('/images/about/origin.jpg');
     animation-delay: 0.1s;
 }
 
 .about-column.vision {
-    background-image: url('/images/vision.jpg');
+    background-image: url('/images/about/vision.jpg');
     animation-delay: 0.3s;
 }
 
 .about-column.mission {
-    background-image: url('/images/mission.png');
+    background-image: url('/images/about/mission.png');
     animation-delay: 0.5s;
 }
 
