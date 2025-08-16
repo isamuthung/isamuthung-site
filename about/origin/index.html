@@ -11,427 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- ===== Stylesheets ===== -->
-    <style>
-        :root {
-            --primary-bg-color: #1a1a1a;
-            --primary-text-color: #ffffff;
-            --secondary-text-color: #333333;
-            --accent-color: #ffffff;
-            --transition-speed: 0.3s;
-            --contact-link-font: 'Playfair Display', cursive;
-            --contact-link-color: #f4f4f4;
-            --contact-link-hover-color: #ffffff;
-            --sidebar-width: 80px;
-        }
-
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            font-family: 'Montserrat', sans-serif;
-            max-width: 100vw;
-        }
-
-        body.scroll-locked {
-            overflow: hidden !important;
-        }
-
-        /* Sidebar toggle button */
-        .sidebar-toggle {
-            position: absolute;
-            top: 30px;
-            left: 22px;
-            width: 36px;
-            height: 30px;
-            cursor: pointer;
-            z-index: 1100;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .toggle-icon {
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-text-color);
-            transition: all var(--transition-speed) ease;
-        }
-
-        .sidebar-toggle.active .toggle-icon:nth-child(1) {
-            transform: translateY(14px) rotate(45deg);
-        }
-        .sidebar-toggle.active .toggle-icon:nth-child(2) {
-            opacity: 0;
-        }
-        .sidebar-toggle.active .toggle-icon:nth-child(3) {
-            transform: translateY(-14px) rotate(-45deg);
-        }
-
-        /* Sidebar container */
-        .vertical-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background-color: var(--primary-bg-color);
-            z-index: 1000;
-            transition: width var(--transition-speed) ease;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: var(--sidebar-width);
-            width: calc(70vw - var(--sidebar-width));
-            height: 100vh;
-            background-color: var(--primary-bg-color);
-            color: var(--primary-text-color);
-            z-index: 990;
-            transform: translateX(-100%);
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            overflow-y: auto;
-            padding: 33px 80px 40px 40px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar.active {
-            transform: translateX(0);
-        }
-
-        /* Sidebar content */
-        .sidebar-content {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            min-height: 0;
-            padding-right: 20px;
-            justify-content: flex-start;
-        }
-
-        .sidebar-text-container {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            max-width: 700px;
-            height: 100%;
-        }
-
-        .sidebar-description {
-            font-family: 'Playfair Display', serif;
-            font-style: normal;
-            font-size: 2.4rem;
-            line-height: 1.35;
-            color: var(--primary-text-color);
-            text-align: left;
-            margin-top: auto;
-            margin-bottom: auto;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            transform: translateY(-10%);
-        }
-
-        .intro-text {
-            margin-bottom: 15px;
-        }
-
-        .mission-text {
-            margin-bottom: 0;
-        }
-
-        /* Navigation Links */
-        .nav-links {
-            font-size: 1.2rem;
-            font-weight: 300;
-            font-family: 'Montserrat', sans-serif;
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 0;
-        }
-
-        .nav-links li {
-            margin-right: 10px;
-            margin-bottom: 15px;
-        }
-
-        .nav-links li.nav-dot {
-            font-size: 1.2rem;
-            opacity: 0.5;
-        }
-
-        .nav-links a {
-            color: var(--primary-text-color);
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 300;
-            position: relative;
-            display: inline-block;
-            transition: opacity var(--transition-speed) ease;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.7;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-text-color);
-            transition: width var(--transition-speed) ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Contact link section */
-        .sidebar-contact {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            margin-top: auto;
-            flex-shrink: 0;
-        }
-
-        .contact-link {
-            text-decoration: none;
-            color: var(--contact-link-color);
-            font-family: var(--contact-link-font);
-            font-size: 2.2rem;
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            position: relative;
-            opacity: 0.85;
-        }
-
-        .contact-link:hover {
-            color: var(--contact-link-hover-color);
-            opacity: 1;
-        }
-
-        .contact-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--contact-link-color);
-            transition: width 0.3s ease;
-        }
-
-        .contact-link:hover::after {
-            width: 100%;
-        }
-
-        /* Overlay behind sidebar */
-        .content-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 980;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
-        }
-
-        .content-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* --- UPDATED MAIN CONTENT FOR SINGLE COLUMN LAYOUT --- */
-        .main-content {
-            width: calc(100vw - var(--sidebar-width));
-            min-height: 100vh;
-            background: white;
-            margin-left: var(--sidebar-width);
-            padding: 60px;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        /* Header styling */
-        .origin-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .origin-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            color: #2c2c2c;
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .origin-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 18px;
-            font-weight: 300;
-            color: #666;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        /* Single Column Content Layout */
-        .origin-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Text content - smaller and wider */
-        .origin-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            line-height: 1.7;
-            color: #2c2c2c;
-            text-align: justify;
-            margin-bottom: 30px;
-            max-width: 100%;
-        }
-
-        .origin-text p {
-            margin-bottom: 20px;
-        }
-
-        .origin-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Photo Band Styling */
-        .photo-band {
-            display: flex;
-            gap: 20px;
-            margin: 60px 0;
-            justify-content: center;
-        }
-
-        .photo-band img {
-            width: calc(33.333% - 14px);
-            height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .photo-band img:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Text pair grouping */
-        .text-pair {
-            margin-bottom: 60px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            :root {
-                --sidebar-width: 60px;
-            }
-
-            .main-content {
-                margin-left: var(--sidebar-width);
-                padding: 50px 40px;
-            }
-
-            .origin-title {
-                font-size: 3rem;
-            }
-
-            .origin-container {
-                max-width: 800px;
-            }
-
-            .sidebar {
-                width: calc(90vw - 60px);
-                padding: 33px 40px 40px 10px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-                padding: 40px 30px;
-            }
-
-            .origin-title {
-                font-size: 2.5rem;
-            }
-
-            .origin-subtitle {
-                font-size: 16px;
-                margin-bottom: 60px;
-            }
-
-            .origin-text {
-                font-size: 14px;
-                text-align: left;
-            }
-
-            .photo-band {
-                flex-direction: column;
-                gap: 15px;
-                margin: 40px 0;
-            }
-
-            .photo-band img {
-                width: 100%;
-                height: 200px;
-            }
-
-            .sidebar {
-                width: calc(95vw - var(--sidebar-width));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-content {
-                padding: 30px 20px;
-            }
-
-            .origin-title {
-                font-size: 2rem;
-            }
-
-            .origin-text {
-                font-size: 13px;
-            }
-
-            .photo-band img {
-                height: 180px;
-            }
-        }
-    </style>
-
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/origin.css">
     <!-- ===== Favicon ===== -->
     <link rel="icon" href="/images/favicon.png" type="image/x-icon">
 
@@ -442,27 +23,7 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-ZB2M38HXQ0');
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.getElementById('sidebar');
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const contentOverlay = document.getElementById('contentOverlay');
-
-            sidebarToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('active');
-                sidebarToggle.classList.toggle('active');
-                contentOverlay.classList.toggle('active');
-                document.body.classList.toggle('scroll-locked');
-            });
-
-            contentOverlay.addEventListener('click', function() {
-                sidebar.classList.remove('active');
-                sidebarToggle.classList.remove('active');
-                contentOverlay.classList.remove('active');
-                document.body.classList.remove('scroll-locked');
-            });
-        });
-    </script>
+</script>   
 </head>
 
 <body>
@@ -518,85 +79,88 @@
                     <p class="origin-subtitle">Isamu Thung</p>
                 </div>
 
-                <!-- Text Pair 1: Early Education & High School Transformation -->
-                <div class="text-pair">
-                    <div class="origin-text">
-                        <p>Over the past decade I've attended 11 schools across America and Japan. My love for learning began in Japanese elementary school, where 1st-graders walk to school independently and everyday felt like a new adventure filled with purpose. But after returning to the U.S. for middle school, I encountered slow-paced, disengaged classrooms that left me frustrated. When COVID hit in 2019, online learning and nine months of living in hotels after our house flooded only deepened my isolation and disillusionment. By 8th-grade, I had essentially given up on traditional school, but choosing to transfer to High Tech High Mesa marked a pivotal moment that would change my life forever.</p>
-                        <p>I could never have anticipated how transformative project-based learning—and the exceptional educators it attracted—could be. Walking into D. Smith's fine arts class and Matt Darling's humanities, I encountered teachers who genuinely cared about every student's success and approached their craft with the dedication of master artisans. When their classroom walls folded away and all 60 students witnessed their collaborative chemistry, something magical happened. Our first project, <em>Uncommon Message</em>, blended art, design, and historical analysis as we created screenprinted T-shirts and sculptures celebrating marginalized heroes, culminating in a public pop-up market. But the greatest transformation was internal—I finally believed again that school could be something extraordinary. This experience sparked an obsession with understanding what makes learning meaningful, leading me to become both inquisitive and at times rebellious as I sought to identify the intangible qualities that create truly engaging educational experiences.</p>
+                <!-- Section 1: Early Education & High School Transformation -->
+                <div class="origin-section" data-layout="text-left">
+                    <div class="origin-content">
+                        <div class="origin-text">
+                            <p>Over the past decade I've attended 11 schools across America and Japan. My love for learning began in Japanese elementary school, where 1st-graders walk to school independently and everyday felt like a new adventure filled with purpose. But after returning to the U.S. for middle school, I encountered slow-paced, disengaged classrooms that left me frustrated. When COVID hit in 2019, online learning and nine months of living in hotels after our house flooded only deepened my isolation and disillusionment. By 8th-grade, I had essentially given up on traditional school, but choosing to transfer to High Tech High Mesa marked a pivotal moment that would change my life forever.</p>
+                            <p>I could never have anticipated how transformative project-based learning—and the exceptional educators it attracted—could be. Walking into D. Smith's fine arts class and Matt Darling's humanities, I encountered teachers who genuinely cared about every student's success and approached their craft with the dedication of master artisans. When their classroom walls folded away and all 60 students witnessed their collaborative chemistry, something magical happened. Our first project, <em>Uncommon Message</em>, blended art, design, and historical analysis as we created screenprinted T-shirts and sculptures celebrating marginalized heroes, culminating in a public pop-up market. But the greatest transformation was internal—I finally believed again that school could be something extraordinary. This experience sparked an obsession with understanding what makes learning meaningful, leading me to become both inquisitive and at times rebellious as I sought to identify the intangible qualities that create truly engaging educational experiences.</p>
+                        </div>
+                        <div class="origin-images">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Japanese elementary school children walking to school" class="img-tall" />
+                            <img src="https://images.unsplash.com/photo-1523580846011-d3982bc2e4ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Students collaborating in a modern classroom with folding walls" class="img-tall" />
+                        </div>
                     </div>
                 </div>
 
-                <!-- Photo Band 1 -->
-                <div class="photo-band">
-                    <img src="image1.jpg" alt="Japanese elementary school children walking to school" />
-                    <img src="image2.jpg" alt="Students collaborating in a modern classroom with folding walls" />
-                    <img src="image3.jpg" alt="Workshop setting with diverse educators in discussion" />
-                </div>
-
-                <!-- Text Pair 2: Systems Thinking Framework & Global Youth Network -->
-                <div class="text-pair">
-                    <div class="origin-text">
-                        <p>This newfound passion for educational change left me hungry for frameworks that could help me make sense of what I was observing, but as my freshman year ended in May 2022, I felt lost despite my growing identity as a changemaker. Through a series of fortunate connections, I found myself as the lone high schooler at an Introductory Workshop to Compassionate Systems in Ventura, California, co-facilitated by Mette Böll and Peter Senge. Suddenly, I was surrounded by educational administrators decades older than me—people whose full-time job was thinking about impactful change efforts. Despite the age difference, I felt right at home, diving into discussions about systemic shortcomings and weighing solutions during every free moment. This wasn't just a thought experiment anymore; I was finally meeting people who could actually reshape the system I was living in.</p>
-                        <p>The workshop introduced me to tools like the Mandala for Systems Change and the Iceberg Model, providing the analytical framework I'd been craving. More importantly, I discovered this was part of a growing global movement, and through meeting Rask from the Youth Leadership Team, I learned about their newly formed Youth Council. I applied, got in, and soon found myself connecting with peers from countries I couldn't even point to on a map, all sharing the same curiosity, compassion, and recognition that school wasn't equipping us for life. After a year as a participant, I was invited to join the Youth Leadership Team as a co-creator, and simultaneously enrolled in Cohort 5 of their Master Practitioner program. A week-long retreat in Garrison, New York, with 40 educators from dozens of nationalities felt like a profound miracle after connecting virtually all year. This framework became my first real job, teaching me more about myself than anything else as I juggled multiple projects, navigated team dynamics across three timezones, and even co-facilitated at the Systems Awareness Lab Conference at MIT.</p>
+                <!-- Section 2: Systems Thinking Framework & Global Youth Network -->
+                <div class="origin-section" data-layout="text-right">
+                    <div class="origin-content">
+                        <div class="origin-images">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Workshop setting with diverse educators in discussion" class="img-tall" />
+                            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Systems thinking workshop" class="img-tall" />
+                        </div>
+                        <div class="origin-text">
+                            <p>This newfound passion for educational change left me hungry for frameworks that could help me make sense of what I was observing, but as my freshman year ended in May 2022, I felt lost despite my growing identity as a changemaker. Through a series of fortunate connections, I found myself as the lone high schooler at an Introductory Workshop to Compassionate Systems in Ventura, California, co-facilitated by Mette Böll and Peter Senge. Suddenly, I was surrounded by educational administrators decades older than me—people whose full-time job was thinking about impactful change efforts. Despite the age difference, I felt right at home, diving into discussions about systemic shortcomings and weighing solutions during every free moment. This wasn't just a thought experiment anymore; I was finally meeting people who could actually reshape the system I was living in.</p>
+                            <p>The workshop introduced me to tools like the Mandala for Systems Change and the Iceberg Model, providing the analytical framework I'd been craving. More importantly, I discovered this was part of a growing global movement, and through meeting Rask from the Youth Leadership Team, I learned about their newly formed Youth Council. I applied, got in, and soon found myself connecting with peers from countries I couldn't even point to on a map, all sharing the same curiosity, compassion, and recognition that school wasn't equipping us for life. After a year as a participant, I was invited to join the Youth Leadership Team as a co-creator, and simultaneously enrolled in Cohort 5 of their Master Practitioner program. A week-long retreat in Garrison, New York, with 40 educators from dozens of nationalities felt like a profound miracle after connecting virtually all year. This framework became my first real job, teaching me more about myself than anything else as I juggled multiple projects, navigated team dynamics across three timezones, and even co-facilitated at the Systems Awareness Lab Conference at MIT.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Photo Band 2 -->
-                <div class="photo-band">
-                    <img src="image4.jpg" alt="International group retreat in Garrison, New York" />
-                    <img src="image5.jpg" alt="Student giving tour to visiting educators" />
-                    <img src="image6.jpg" alt="Deeper Learning Japan conference in Tokyo" />
-                </div>
-
-                <!-- Text Pair 3: Student Ambassador Role & Deeper Learning Conference -->
-                <div class="text-pair">
-                    <div class="origin-text">
-                        <p>While deepening my systems thinking skills, I remained grounded in my home community, becoming a student ambassador at HTHM and taking educators on tours to discuss project-based learning from both pedagogical theory and lived student experience. This role led me to volunteer at the annual Deeper Learning conference, a three-day gathering of over 1,000 educators exploring the future of education. More than networking or hearing new classroom ideas, this community legitimized my feelings that the traditional paradigm needed disrupting and gave me a vehicle to channel my dissatisfaction into value—suddenly, reshaping education wasn't just a far-fetched dream but something I could actually contribute to.</p>
-                        <p>At my first Deeper Learning conference in 2023, I assisted Ron Berger with his "Dive into Disco" Deep Dive, exploring how the disco movement created spaces for marginalized communities to celebrate diverse identities. Ron later became a mentor, and his book <em>An Ethic of Excellence</em> was translated into Japanese by my mother for Japanese educators. After hosting my own workshop at DL24 about nurturing classroom connection, whispers emerged about bringing Deeper Learning to Japan for the first time. In summer 2024, I collaborated with Kana Ashida to organize the inaugural Deeper Learning Japan conferences in Tokyo and Kyoto, gathering 150 educators to explore "beautiful work." Working alongside Ron as keynote speaker and professional calligrapher Charlotte Suzanne Tournet at venues like Tokyo's University of Creativity, I witnessed educators who, despite Japan's pressure to conform to high standards, carried the same desire to reshape education for the next generation. In that bustling heart of Tokyo, I felt at ease knowing that good things were happening in a place I consider home and that I was just one of many working toward a brighter future.</p>
+                <!-- Section 3: Student Ambassador Role & Deeper Learning Conference -->
+                <div class="origin-section" data-layout="text-left">
+                    <div class="origin-content">
+                        <div class="origin-text">
+                            <p>While deepening my systems thinking skills, I remained grounded in my home community, becoming a student ambassador at HTHM and taking educators on tours to discuss project-based learning from both pedagogical theory and lived student experience. This role led me to volunteer at the annual Deeper Learning conference, a three-day gathering of over 1,000 educators exploring the future of education. More than networking or hearing new classroom ideas, this community legitimized my feelings that the traditional paradigm needed disrupting and gave me a vehicle to channel my dissatisfaction into value—suddenly, reshaping education wasn't just a far-fetched dream but something I could actually contribute to.</p>
+                            <p>At my first Deeper Learning conference in 2023, I assisted Ron Berger with his "Dive into Disco" Deep Dive, exploring how the disco movement created spaces for marginalized communities to celebrate diverse identities. Ron later became a mentor, and his book <em>An Ethic of Excellence</em> was translated into Japanese by my mother for Japanese educators. After hosting my own workshop at DL24 about nurturing classroom connection, whispers emerged about bringing Deeper Learning to Japan for the first time. In summer 2024, I collaborated with Kana Ashida to organize the inaugural Deeper Learning Japan conferences in Tokyo and Kyoto, gathering 150 educators to explore "beautiful work." Working alongside Ron as keynote speaker and professional calligrapher Charlotte Suzanne Tournet at venues like Tokyo's University of Creativity, I witnessed educators who, despite Japan's pressure to conform to high standards, carried the same desire to reshape education for the next generation. In that bustling heart of Tokyo, I felt at ease knowing that good things were happening in a place I consider home and that I was just one of many working toward a brighter future.</p>
+                        </div>
+                        <div class="origin-images">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Student giving tour to visiting educators" class="img-wide" />
+                            <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Deeper Learning Japan conference in Tokyo" class="img-wide" />
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Conference networking and learning" class="img-wide" />
+                        </div>
                     </div>
                 </div>
 
-                <!-- Photo Band 3 -->
-                <div class="photo-band">
-                    <img src="image7.jpg" alt="Rural Japanese mountain village with students" />
-                    <img src="image8.jpg" alt="Students camping by Aoki Lake" />
-                    <img src="image9.jpg" alt="Administrator meeting with students" />
-                </div>
-
-                <!-- Text Pair 4: Hakuba Teaching Experience & Program Leadership -->
-                <div class="text-pair">
-                    <div class="origin-text">
-                        <p>My connection to Japan deepened that same summer when I was invited by Tomoko Kusamoto, founder of Hakuba International School, to intern at their week-long summer program in a magical rural village nestled between snow-capped mountains. What made this connection even more meaningful was discovering that Tomoko-san had completed the same Compassionate Systems Master Practitioner program I was in, and her capstone project was building this very school where I would be working. When the certified facilitator for our main project—the World Peace Game—fell ill the night before we began, our small team had to scramble past midnight to pivot to a Model UN simulation. Despite the crisis, this created an unexpected opportunity: I was able to design and teach custom lessons on ecosystems, internet infrastructure, and personal well-being systems, giving me my first taste of teaching freely without traditional classroom limitations.</p>
-                        <p>The following summer, I returned not just as an intern but as co-designer of an expanded two-week program with double the participants. When a medical emergency prevented the planned U.S. camp counselor from coming, I found myself alongside another pre-college student organizing the entire experience for 24 middle schoolers around the clock. We built schedules, planned outdoor adventures including hikes up Iwatake Mountain and overnight camping at Aoki Lake, and designed a sustainability research project culminating in pitches to real community leaders. The work proved far more complex than imagined—memorizing names and personalities, mediating conflicts, setting boundaries, and ensuring every student felt seen and safe required real dedication and heart. The most enduring lesson was that to truly care for others, you must first care for yourself, and despite the decision fatigue and rising tensions, those two weeks became a masterclass in trusting my team and rising to every occasion. The experience crystallized that purposeful education is built on trust, adaptability, and empathy.</p>
+                <!-- Section 4: Hakuba Teaching Experience & Program Leadership -->
+                <div class="origin-section" data-layout="text-right">
+                    <div class="origin-content">
+                        <div class="origin-images">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Rural Japanese mountain village with students" class="img-tall" />
+                            <img src="https://images.unsplash.com/photo-1464822759844-d150baec93c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mountain adventure education" class="img-tall" />
+                        </div>
+                        <div class="origin-text">
+                            <p>My connection to Japan deepened that same summer when I was invited by Tomoko Kusamoto, founder of Hakuba International School, to intern at their week-long summer program in a magical rural village nestled between snow-capped mountains. What made this connection even more meaningful was discovering that Tomoko-san had completed the same Compassionate Systems Master Practitioner program I was in, and her capstone project was building this very school where I would be working. When the certified facilitator for our main project—the World Peace Game—fell ill the night before we began, our small team had to scramble past midnight to pivot to a Model UN simulation. Despite the crisis, this created an unexpected opportunity: I was able to design and teach custom lessons on ecosystems, internet infrastructure, and personal well-being systems, giving me my first taste of teaching freely without traditional classroom limitations.</p>
+                            <p>The following summer, I returned not just as an intern but as co-designer of an expanded two-week program with double the participants. When a medical emergency prevented the planned U.S. camp counselor from coming, I found myself alongside another pre-college student organizing the entire experience for 24 middle schoolers around the clock. We built schedules, planned outdoor adventures including hikes up Iwatake Mountain and overnight camping at Aoki Lake, and designed a sustainability research project culminating in pitches to real community leaders. The work proved far more complex than imagined—memorizing names and personalities, mediating conflicts, setting boundaries, and ensuring every student felt seen and safe required real dedication and heart. The most enduring lesson was that to truly care for others, you must first care for yourself, and despite the decision fatigue and rising tensions, those two weeks became a masterclass in trusting my team and rising to every occasion. The experience crystallized that purposeful education is built on trust, adaptability, and empathy.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Photo Band 4 -->
-                <div class="photo-band">
-                    <img src="image10.jpg" alt="Student coding on laptop with graduation slideshow" />
-                    <img src="image11.jpg" alt="Stanford University campus entrance" />
-                    <img src="image12.jpg" alt="Looking forward to future possibilities" />
-                </div>
-
-                <!-- Text Pair 5: Administrative Mentorship & Digital Systems Discovery -->
-                <div class="text-pair">
-                    <div class="origin-text">
-                        <p>As my high school journey neared its end, my junior-year internship provided the perfect synthesis of everything I'd learned about educational change and systems thinking. When choosing my mentor, I didn't start with the type of work I wanted to do—I started with the kind of person I wanted to learn from, and one name stood out immediately: Matt Darling, my ninth-grade Humanities teacher who had reignited my spark for learning. By then, Matt had become Dean of Expeditions at Summit Prep High School in the Bay Area, and after fundraising for the trip, I experienced school for the first time through an administrator's lens. I shadowed him through partnership negotiations, closed-door meetings, and daily operations, noticing his deep rapport with students who respected him because he understood their stories mattered more than transcript numbers. This reinforced a truth that pierced me deeply: education is rooted in human connection, and collective growth makes a school more than just a building.</p>
-                        <p>An unexpected avenue emerged when Matt was tasked with creating the school's graduation slideshow—what would have been repetitive manual work became my introduction to engineering digital solutions. With no prior coding experience, I used ChatGPT to learn Google Apps Script and JavaScript, automating the entire slideshow generation process through forms and data integration. After dozens of trials and errors, the breakthrough moment came when I clicked a button and watched the script automatically create the complete slideshow—not just solving the immediate problem but creating a reusable asset for future years. This opened a rabbit hole into software architecture, APIs, and the foundations of how the internet works, giving me profound appreciation for the digital infrastructure powering our lives. After volunteering nearly 100 hours with my own school's IT Director, these experiences shaped my recognition that lasting change happens at the intersection of human connection and digital architecture, leading me to ask everywhere I go: what system could make this better?</p>
+                <!-- Section 5: Administrative Mentorship & Digital Systems Discovery -->
+                <div class="origin-section" data-layout="text-left">
+                    <div class="origin-content">
+                        <div class="origin-text">
+                            <p>As my high school journey neared its end, my junior-year internship provided the perfect synthesis of everything I'd learned about educational change and systems thinking. When choosing my mentor, I didn't start with the type of work I wanted to do—I started with the kind of person I wanted to learn from, and one name stood out immediately: Matt Darling, my ninth-grade Humanities teacher who had reignited my spark for learning. By then, Matt had become Dean of Expeditions at Summit Prep High School in the Bay Area, and after fundraising for the trip, I experienced school for the first time through an administrator's lens. I shadowed him through partnership negotiations, closed-door meetings, and daily operations, noticing his deep rapport with students who respected him because he understood their stories mattered more than transcript numbers. This reinforced a truth that pierced me deeply: education is rooted in human connection, and collective growth makes a school more than just a building.</p>
+                            <p>An unexpected avenue emerged when Matt was tasked with creating the school's graduation slideshow—what would have been repetitive manual work became my introduction to engineering digital solutions. With no prior coding experience, I used ChatGPT to learn Google Apps Script and JavaScript, automating the entire slideshow generation process through forms and data integration. After dozens of trials and errors, the breakthrough moment came when I clicked a button and watched the script automatically create the complete slideshow—not just solving the immediate problem but creating a reusable asset for future years. This opened a rabbit hole into software architecture, APIs, and the foundations of how the internet works, giving me profound appreciation for the digital infrastructure powering our lives. After volunteering nearly 100 hours with my own school's IT Director, these experiences shaped my recognition that lasting change happens at the intersection of human connection and digital architecture, leading me to ask everywhere I go: what system could make this better?</p>
+                        </div>
+                        <div class="origin-images">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Administrator meeting with students" class="img-tall" />
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Student coding on laptop" class="img-tall" />
+                        </div>
                     </div>
                 </div>
 
-                 <!-- Photo Band 5 -->
-                   <div class="photo-band">
-                    <img src="image10.jpg" alt="Student coding on laptop with graduation slideshow" />
-                    <img src="image11.jpg" alt="Stanford University campus entrance" />
-                    <img src="image12.jpg" alt="Looking forward to future possibilities" />
-                </div>
-                <!-- Text Pair 6: Future Vision & Closing Reflection -->
-                <div class="text-pair">
-                    <div class="origin-text">
-                        <p>Now, in late 2025, I'm on the cusp of a new chapter of my life: Stanford University. My loyalty lies with reshaping educational systems for the better, but before I settle down I'd like to explore entrepreneurship pathways by using business as a vehicle for good. All the lessons I've learned, all the experiences I've had, the people I've met, the friends I've made, the mistakes I've embraced, and the small wins I've achieved—they've all led to me starting this new phase of things.</p>
-                        <p>From that disillusioned 8th-grader who had given up on school to a systems thinker ready to build solutions at scale, this journey has taught me that transformation happens through the patient work of connecting with people, understanding root causes, and building systems that can outlast any individual effort. As I prepare to dive into the unknown possibilities that await at Stanford, I carry with me the conviction that the most meaningful work lies at the intersection of human flourishing and systemic change, and I'm excited to discover what new doors will open when I combine everything I've learned with the entrepreneurial spirit I'm ready to unleash.</p>
+                <!-- Section 6: Future Vision & Closing Reflection -->
+                <div class="origin-section" data-layout="text-right">
+                    <div class="origin-content">
+                        <div class="origin-images">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Looking forward to future possibilities" class="img-wide" />
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Future of education and technology" class="img-wide" />
+                        </div>
+                        <div class="origin-text">
+                            <p>Now, in late 2025, I'm on the cusp of a new chapter of my life: Stanford University. My loyalty lies with reshaping educational systems for the better, but before I settle down I'd like to explore entrepreneurship pathways by using business as a vehicle for good. All the lessons I've learned, all the experiences I've had, the people I've met, the friends I've made, the mistakes I've embraced, and the small wins I've achieved—they've all led to me starting this new phase of things.</p>
+                            <p>From that disillusioned 8th-grader who had given up on school to a systems thinker ready to build solutions at scale, this journey has taught me that transformation happens through the patient work of connecting with people, understanding root causes, and building systems that can outlast any individual effort. As I prepare to dive into the unknown possibilities that await at Stanford, I carry with me the conviction that the most meaningful work lies at the intersection of human flourishing and systemic change, and I'm excited to discover what new doors will open when I combine everything I've learned with the entrepreneurial spirit I'm ready to unleash.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -604,5 +168,7 @@
         </div>
     </main>
 
+    <!-- ================= Footer / Scripts ================= -->
+    <script src="/js/origin.js"></script>
 </body>
 </html>
