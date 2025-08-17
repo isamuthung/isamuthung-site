@@ -17,7 +17,7 @@ contentOverlay.addEventListener('click', () => {
 
 // Image fade-in animation with staggered timing - NO PARALLAX
 const imageObserverOptions = {
-    threshold: 0.3,
+    threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
 };
 
@@ -30,7 +30,7 @@ const imageObserver = new IntersectionObserver((entries) => {
                 if (!img.classList.contains('visible')) {
                     setTimeout(() => {
                         img.classList.add('visible');
-                    }, index * 200); // Stagger the animations
+                    }, index); // Stagger the animations
                 }
             });
             // Stop observing this container once images are visible
@@ -41,7 +41,7 @@ const imageObserver = new IntersectionObserver((entries) => {
 
 // Section visibility observer for scroll animations
 const sectionObserverOptions = {
-    threshold: 0.2,
+    threshold: 0.01,
     rootMargin: '0px 0px -100px 0px'
 };
 

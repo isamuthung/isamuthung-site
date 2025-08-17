@@ -376,7 +376,7 @@ body.scroll-locked {
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.4s ease;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -388,7 +388,7 @@ body.scroll-locked {
 
 /* Ensure hover only affects visible images and overrides static position */
 .origin-images img.visible:hover {
-    transform: translateY(-8px) !important;
+    transform: translateY(-1px) !important;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
 }
 
