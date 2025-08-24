@@ -45,7 +45,6 @@ main {
 }
 
 /* Staggered fade-in for portfolio items - FIXED VERSION */
-
 @keyframes fadeInItem {
     from {
         opacity: 0;
@@ -68,6 +67,11 @@ main {
     --contact-link-color: #f4f4f4;
     --contact-link-hover-color: #ffffff;
     --sidebar-width: 80px;
+    
+    /* Responsive font sizes */
+    --sidebar-desc-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    --contact-link-size: clamp(1.6rem, 3vw, 2.2rem);
+    --nav-link-size: clamp(1rem, 1.8vw, 1.2rem);
 }
 
 /* Mobile hover trigger area */
@@ -86,11 +90,11 @@ main {
 /* Sidebar toggle button - IMPROVED RESPONSIVE */
 .sidebar-toggle {
     position: absolute;
-    top: 30px;
+    top: clamp(18px, 4vw, 30px);
     left: 50%;
     transform: translateX(-50%);
-    width: 28px;
-    height: 24px;
+    width: clamp(18px, 4vw, 28px);
+    height: clamp(14px, 3.5vw, 24px);
     cursor: pointer;
     z-index: 1100;
     display: flex;
@@ -100,19 +104,19 @@ main {
 
 .toggle-icon {
     width: 100%;
-    height: 2px;
+    height: clamp(1.5px, 0.3vw, 2px);
     background-color: var(--primary-text-color);
     transition: all var(--transition-speed) ease;
 }
 
 .sidebar-toggle.active .toggle-icon:nth-child(1) {
-    transform: translateY(11px) rotate(45deg);
+    transform: translateY(calc(clamp(14px, 3.5vw, 24px) / 2 - clamp(1.5px, 0.3vw, 2px) / 2)) rotate(45deg);
 }
 .sidebar-toggle.active .toggle-icon:nth-child(2) {
     opacity: 0;
 }
 .sidebar-toggle.active .toggle-icon:nth-child(3) {
-    transform: translateY(-11px) rotate(-45deg);
+    transform: translateY(calc(-1 * (clamp(14px, 3.5vw, 24px) / 2 - clamp(1.5px, 0.3vw, 2px) / 2))) rotate(-45deg);
 }
 
 /* Sidebar container */
@@ -127,12 +131,12 @@ main {
     transition: width var(--transition-speed) ease;
 }
 
-/* Sidebar */
+/* Sidebar - IMPROVED RESPONSIVE CONTAINER */
 .sidebar {
     position: fixed;
     top: 0;
     left: var(--sidebar-width);
-    width: calc(70vw - var(--sidebar-width));
+    width: calc(69vw - var(--sidebar-width));
     height: 100vh;
     background-color: var(--primary-bg-color);
     color: var(--primary-text-color);
@@ -140,7 +144,7 @@ main {
     transform: translateX(-100%);
     transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
     overflow-y: auto;
-    padding: 33px 80px 40px 40px;
+    padding: clamp(20px, 4vw, 40px) clamp(20px, 6vw, 80px) clamp(25px, 5vw, 40px) clamp(20px, 4vw, 40px);
     display: flex;
     flex-direction: column;
 }
@@ -149,79 +153,83 @@ main {
     transform: translateX(0);
 }
 
-/* Sidebar content */
+/* IMPROVED SIDEBAR CONTENT CONTAINER */
 .sidebar-content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    height: 100%;
     min-height: 0;
-    padding-right: 20px;
-    justify-content: flex-start;
+    padding-right: clamp(10px, 2vw, 20px);
+    justify-content: space-between;
+    gap: clamp(20px, 4vh, 40px);
 }
 
+/* IMPROVED TEXT CONTAINER - Better height management */
 .sidebar-text-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    max-width: 700px;
-    height: 100%;
+    flex: 1;
+    max-width: min(700px, 90%);
+    min-height: 0;
+    justify-content: center;
+    align-items: flex-start;
 }
 
+/* RESPONSIVE SIDEBAR DESCRIPTION - No more fixed sizes */
 .sidebar-description {
     font-family: 'Playfair Display', serif;
     font-style: normal;
-    font-size: 2.4rem;
-    line-height: 1.35;
+    font-size: var(--sidebar-desc-size);
+    line-height: clamp(1.25, 1.4, 1.45);
     color: var(--primary-text-color);
     text-align: left;
-    margin-top: auto;
-    margin-bottom: auto;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transform: translateY(-10%);
+    margin: 0;
+    padding: clamp(10px, 2vh, 20px) 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .intro-text {
-    margin-bottom: 15px;
+    margin-bottom: clamp(10px, 2vh, 15px);
 }
 
 .mission-text {
     margin-bottom: 0;
 }
 
-/* Navigation Links */
+/* RESPONSIVE NAVIGATION LINKS */
 .nav-links {
-    font-size: 1.2rem;
+    font-size: var(--nav-link-size);
     font-weight: 300;
     font-family: 'Montserrat', sans-serif;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 30px;
+    margin: clamp(15px, 3vh, 25px) 0 clamp(20px, 4vh, 30px) 0;
     padding: 0;
+    gap: clamp(6px, 1vw, 10px);
 }
 
 .nav-links li {
-    margin-right: 10px;
-    margin-bottom: 15px;
+    margin-bottom: clamp(8px, 1.5vh, 15px);
 }
 
 .nav-links li.nav-dot {
-    font-size: 1.2rem;
+    font-size: var(--nav-link-size);
     opacity: 0.5;
+    margin: 0 clamp(2px, 0.5vw, 5px);
 }
 
 .nav-links a {
     color: var(--primary-text-color);
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: var(--nav-link-size);
     font-weight: 300;
     position: relative;
     display: inline-block;
     transition: opacity var(--transition-speed) ease;
+    word-break: keep-all;
 }
 
 .nav-links a:hover {
@@ -233,7 +241,7 @@ main {
     position: absolute;
     width: 0;
     height: 1px;
-    bottom: -5px;
+    bottom: -3px;
     left: 0;
     background-color: var(--primary-text-color);
     transition: width var(--transition-speed) ease;
@@ -243,25 +251,28 @@ main {
     width: 100%;
 }
 
-/* Contact link section */
+/* RESPONSIVE CONTACT LINK SECTION */
 .sidebar-contact {
     display: flex;
-    gap: 30px;
+    gap: clamp(15px, 4vw, 30px);
     align-items: center;
-    margin-top: auto;
     flex-shrink: 0;
+    flex-wrap: wrap;
+    margin-top: auto;
 }
 
 .contact-link {
     text-decoration: none;
     color: var(--contact-link-color);
     font-family: var(--contact-link-font);
-    font-size: 2.2rem;
+    font-size: var(--contact-link-size);
     font-weight: 400;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     position: relative;
     opacity: 0.85;
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 .contact-link:hover {
@@ -274,7 +285,7 @@ main {
     position: absolute;
     width: 0;
     height: 1px;
-    bottom: -5px;
+    bottom: -3px;
     left: 0;
     background-color: var(--contact-link-color);
     transition: width 0.3s ease;
@@ -303,47 +314,23 @@ main {
     visibility: visible;
 }
 
-/* Responsive Design - IMPROVED */
+/* RESPONSIVE DESIGN - IMPROVED WITH BETTER BREAKPOINTS */
 
 /* Large tablets and small desktops */
 @media (max-width: 1024px) {
     :root {
         --sidebar-width: 60px;
+        --sidebar-desc-size: clamp(1.6rem, 3vw, 2rem);
+        --contact-link-size: clamp(1.4rem, 2.8vw, 1.9rem);
+        --nav-link-size: clamp(0.95rem, 1.6vw, 1.1rem);
     }
 
     .sidebar {
-        width: calc(85vw - var(--sidebar-width));
-        padding: 30px 40px 35px 30px;
+        width: calc(60vw - var(--sidebar-width));
     }
 
-    .sidebar-description {
-        font-size: 2rem;
-    }
-
-    .contact-link {
-        font-size: 1.9rem;
-    }
-
-    .nav-links {
-        font-size: 1.1rem;
-        margin-bottom: 25px;
-    }
-
-    .nav-links a {
-        font-size: 1.1rem;
-    }
-
-    .sidebar-toggle {
-        width: 24px;
-        height: 20px;
-        top: 25px;
-    }
-
-    .sidebar-toggle.active .toggle-icon:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-    .sidebar-toggle.active .toggle-icon:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+    .sidebar-content {
+        gap: clamp(15px, 3vh, 30px);
     }
 }
 
@@ -351,53 +338,27 @@ main {
 @media (max-width: 768px) {
     :root {
         --sidebar-width: 50px;
+        --sidebar-desc-size: clamp(1.4rem, 4vw, 1.7rem);
+        --contact-link-size: clamp(1.3rem, 3.5vw, 1.6rem);
+        --nav-link-size: clamp(0.9rem, 1.8vw, 1rem);
     }
 
     .sidebar {
-        width: calc(90vw - var(--sidebar-width));
-        padding: 25px 30px 30px 25px;
+        width: calc(65vw - var(--sidebar-width));
     }
 
     .sidebar-description {
-        font-size: 1.7rem;
         line-height: 1.4;
     }
 
-    .contact-link {
-        font-size: 1.6rem;
-    }
-
     .sidebar-contact {
-        gap: 20px;
         flex-direction: column;
         align-items: flex-start;
+        gap: clamp(10px, 3vh, 20px);
     }
 
     .nav-links {
-        font-size: 1rem;
-        margin-bottom: 20px;
-    }
-
-    .nav-links a {
-        font-size: 1rem;
-    }
-
-    .nav-links li {
-        margin-right: 8px;
-        margin-bottom: 12px;
-    }
-
-    .sidebar-toggle {
-        width: 22px;
-        height: 18px;
-        top: 20px;
-    }
-
-    .sidebar-toggle.active .toggle-icon:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .sidebar-toggle.active .toggle-icon:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        gap: clamp(4px, 0.8vw, 8px);
     }
 }
 
@@ -405,60 +366,37 @@ main {
 @media (max-width: 480px) {
     :root {
         --sidebar-width: 45px;
+        --sidebar-desc-size: clamp(1.2rem, 5vw, 1.4rem);
+        --contact-link-size: clamp(1.2rem, 4vw, 1.4rem);
+        --nav-link-size: clamp(0.85rem, 2vw, 0.95rem);
     }
 
     .sidebar {
-        width: calc(95vw - var(--sidebar-width));
-        padding: 20px 20px 25px 20px;
-    }
-
-    .sidebar-description {
-        font-size: 1.4rem;
-        line-height: 1.45;
-        transform: translateY(-5%);
-    }
-
-    .contact-link {
-        font-size: 1.4rem;
-    }
-
-    .sidebar-contact {
-        gap: 15px;
-    }
-
-    .nav-links {
-        font-size: 0.95rem;
-        margin-bottom: 18px;
-    }
-
-    .nav-links a {
-        font-size: 0.95rem;
-    }
-
-    .nav-links li {
-        margin-right: 6px;
-        margin-bottom: 10px;
-    }
-
-    .sidebar-toggle {
-        width: 20px;
-        height: 16px;
-        top: 18px;
-    }
-
-    .toggle-icon {
-        height: 1.5px;
-    }
-
-    .sidebar-toggle.active .toggle-icon:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-    .sidebar-toggle.active .toggle-icon:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
+        width: calc(70vw - var(--sidebar-width));
+        padding: clamp(15px, 3vw, 20px);
     }
 
     .sidebar-content {
-        padding-right: 10px;
+        padding-right: clamp(5px, 1vw, 10px);
+        gap: clamp(10px, 2vh, 18px);
+    }
+
+    .sidebar-description {
+        line-height: 1.45;
+        padding: clamp(5px, 1vh, 10px) 0;
+    }
+
+    .sidebar-contact {
+        gap: clamp(8px, 2vh, 15px);
+    }
+
+    .nav-links {
+        gap: clamp(3px, 0.5vw, 6px);
+        margin: clamp(10px, 2vh, 15px) 0 clamp(12px, 2.5vh, 18px) 0;
+    }
+
+    .nav-links li {
+        margin-bottom: clamp(6px, 1vh, 10px);
     }
 }
 
@@ -466,40 +404,22 @@ main {
 @media (max-width: 360px) {
     :root {
         --sidebar-width: 40px;
+        --sidebar-desc-size: clamp(1.1rem, 5.5vw, 1.2rem);
+        --contact-link-size: clamp(1.1rem, 4.5vw, 1.2rem);
+        --nav-link-size: clamp(0.8rem, 2.2vw, 0.9rem);
     }
 
     .sidebar {
-        width: calc(100vw - var(--sidebar-width));
-        padding: 18px 15px 20px 15px;
+        width: calc(75vw - var(--sidebar-width));
+        padding: clamp(12px, 2.5vw, 15px);
+    }
+
+    .sidebar-content {
+        gap: clamp(8px, 1.5vh, 12px);
     }
 
     .sidebar-description {
-        font-size: 1.2rem;
-    }
-
-    .contact-link {
-        font-size: 1.2rem;
-    }
-
-    .nav-links {
-        font-size: 0.9rem;
-    }
-
-    .nav-links a {
-        font-size: 0.9rem;
-    }
-
-    .sidebar-toggle {
-        width: 18px;
-        height: 14px;
-        top: 16px;
-    }
-
-    .sidebar-toggle.active .toggle-icon:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-    }
-    .sidebar-toggle.active .toggle-icon:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
+        padding: clamp(3px, 0.5vh, 8px) 0;
     }
 }
 
@@ -509,6 +429,28 @@ main {
     padding: 20px;
     height: 100vh;
     overflow-y: auto;
+}
+
+/* Prevent text overflow and ensure proper scrolling on very small screens */
+@media (max-height: 500px) {
+    .sidebar {
+        overflow-y: auto;
+    }
+    
+    .sidebar-content {
+        justify-content: flex-start;
+        gap: clamp(8px, 1vh, 15px);
+    }
+    
+    .sidebar-text-container {
+        flex: none;
+        justify-content: flex-start;
+    }
+    
+    .sidebar-description {
+        padding: clamp(5px, 1vh, 10px) 0;
+        margin: 0;
+    }
 }
 
 /* ===== COMING SOON PAGE STYLES ===== */
