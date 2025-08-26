@@ -1,4 +1,4 @@
-/* Vision Page Specific Styles */
+/* Vision Page Specific Styles with responsive scaling */
 .vision-container {
     display: flex;
     flex-direction: column;
@@ -6,8 +6,8 @@
     align-items: center;
     height: 100vh; /* Keep height for desktop centering */
     min-height: 100vh; /* Allow expansion on mobile */
-    padding: 0px 40px;
-    max-width: 1000px;
+    padding: 0 clamp(30px, 4vw, 80px);
+    max-width: clamp(800px, 70vw, 1200px);
     margin: 0 auto;
     opacity: 0;
     animation: fadeInContainer 1s ease-out 0.1s forwards;
@@ -26,13 +26,12 @@
 }
 
 .vision-section {
-    margin-bottom: 50px;
+    margin-bottom: clamp(35px, 5vw, 70px);
     text-align: center;
     opacity: 0;
     transform: translateY(40px);
     animation: fadeInSection 0.8s ease-out forwards;
     flex-shrink: 0;
-    /* Remove conflicting transition that interferes with animations */
 }
 
 @keyframes fadeInSection {
@@ -49,10 +48,10 @@
 .vision-header {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 2.5vw, 3.5rem); /* Better responsive scaling */
     font-weight: 400;
     color: #333333;
-    margin-bottom: 20px;
+    margin-bottom: clamp(15px, 2vw, 30px);
     letter-spacing: 0.5px;
     position: relative;
     display: inline-block;
@@ -89,11 +88,11 @@
 
 .vision-text {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.05rem;
+    font-size: clamp(1rem, 1.5vw, 1.6rem); /* Better responsive scaling */
     font-weight: 300;
     line-height: 1.6;
     color: #555555;
-    max-width: 700px;
+    max-width: clamp(600px, 60vw, 800px);
     margin: 0 auto;
     transition: color 0.3s ease;
     position: relative;
@@ -112,7 +111,6 @@
     transform: translateY(-2px); /* Subtle lift instead of scale */
 }
 
-/* Remove the complex hover system that was causing conflicts */
 .vision-container:hover .vision-section:not(:hover) {
     opacity: 0.8;
 }
@@ -121,83 +119,160 @@
     opacity: 1;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Large Desktop optimizations (1440px and up) */
+@media (min-width: 1440px) {
     .vision-container {
-        padding: 50px 30px;
-        height: auto; /* Allow natural height on mobile */
-        min-height: 100vh;
-        justify-content: flex-start; /* Allow content to flow naturally */
-        padding-top: 80px; /* Add more top padding to account for sidebar */
-    }
-    
-    .vision-header {
-        font-size: 1.7rem;
-    }
-    
-    .vision-text {
-        font-size: 0.95rem;
-        line-height: 1.5;
+        max-width: clamp(1000px, 65vw, 1400px);
+        padding: 0 clamp(60px, 6vw, 120px);
     }
     
     .vision-section {
-        margin-bottom: 40px;
+        margin-bottom: clamp(50px, 6vw, 90px);
     }
     
-    /* Disable hover effects on mobile to prevent issues */
+    .vision-header {
+        font-size: clamp(2.2rem, 2.8vw, 3.2rem); /* Limited max size */
+    }
+    
+    .vision-text {
+        font-size: clamp(1.2rem, 1.4vw, 1.6rem); /* Limited max size */
+        max-width: clamp(800px, 65vw, 1000px);
+    }
+}
+
+/* Ultra-wide screens (1920px and up) */
+@media (min-width: 1920px) {
+    .vision-container {
+        max-width: clamp(1200px, 70vw, 1600px);
+    }
+    
+    .vision-header {
+        font-size: clamp(2.5rem, 3vw, 3.5rem); /* Much more limited max size */
+    }
+    
+    .vision-text {
+        font-size: clamp(1.3rem, 1.5vw, 1.8rem); /* Much more limited max size */
+        max-width: clamp(900px, 60vw, 1200px);
+    }
+}
+
+/* Standard desktop (1025px - 1439px) */
+@media (max-width: 1439px) and (min-width: 1025px) {
+    .vision-container {
+        padding: 0 clamp(40px, 5vw, 70px);
+    }
+    
+    .vision-section {
+        margin-bottom: clamp(40px, 5vw, 60px);
+    }
+    
+    .vision-header {
+        font-size: clamp(2.2rem, 2.8vw, 3.2rem); /* Adjusted for this range */
+    }
+    
+    .vision-text {
+        font-size: clamp(1.1rem, 1.4vw, 1.5rem); /* Adjusted for this range */
+    }
+}
+
+/* Tablet landscape and small desktop (769px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .vision-container {
+        padding: 0 clamp(30px, 4vw, 50px);
+    }
+    
+    .vision-header {
+        font-size: clamp(1.8rem, 2.5vw, 2.5rem); /* Smaller for tablets */
+        margin-bottom: clamp(12px, 2vw, 22px);
+    }
+    
+    .vision-text {
+        font-size: clamp(1rem, 1.3vw, 1.3rem); /* Smaller for tablets */
+        max-width: clamp(550px, 65vw, 750px);
+    }
+    
+    .vision-section {
+        margin-bottom: clamp(35px, 4.5vw, 55px);
+    }
+}
+
+/* Tablet portrait (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+    .vision-container {
+        padding: clamp(40px, 6vw, 60px) clamp(25px, 3vw, 40px);
+        height: auto;
+        min-height: 100vh;
+        justify-content: flex-start;
+        padding-top: clamp(60px, 8vw, 100px);
+    }
+    
+    .vision-header {
+        font-size: clamp(1.5rem, 3.5vw, 2rem); /* Smaller for tablet portrait */
+        margin-bottom: clamp(10px, 1.5vw, 18px);
+    }
+    
+    .vision-text {
+        font-size: clamp(0.95rem, 2vw, 1.15rem); /* Smaller for tablet portrait */
+        line-height: 1.5;
+        max-width: clamp(450px, 85vw, 600px);
+    }
+    
+    .vision-section {
+        margin-bottom: clamp(30px, 4vw, 45px);
+    }
+    
+    /* Disable hover effects on mobile */
     .vision-section:hover {
         transform: none;
     }
     
     .vision-container:hover .vision-section:not(:hover) {
-        opacity: 1; /* Reset hover opacity changes on mobile */
+        opacity: 1;
     }
 }
 
+/* Mobile (480px and below) */
 @media (max-width: 480px) {
     .vision-container {
-        padding: 40px 20px;
-        padding-top: 70px; /* Ensure content doesn't get hidden behind sidebar */
+        padding: clamp(30px, 4vw, 45px) clamp(15px, 2vw, 25px);
+        padding-top: clamp(50px, 8vw, 80px);
         justify-content: flex-start;
     }
     
     .vision-header {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
+        font-size: clamp(1.2rem, 4vw, 1.6rem); /* Smallest for mobile */
+        margin-bottom: clamp(8px, 1.2vw, 15px);
     }
     
     .vision-text {
-        font-size: 0.9rem;
+        font-size: clamp(0.85rem, 2.8vw, 1rem); /* Smallest for mobile */
         line-height: 1.4;
+        max-width: clamp(300px, 90vw, 450px);
     }
     
     .vision-section {
-        margin-bottom: 35px;
+        margin-bottom: clamp(25px, 3.5vw, 40px);
     }
     
-    /* Ensure last section has bottom margin for scrolling */
     .vision-section:last-child {
-        margin-bottom: 50px;
+        margin-bottom: clamp(40px, 6vw, 60px);
     }
 }
 
 /* Additional mobile-specific fixes */
 @media (max-width: 768px) {
-    /* Hide scrollbars while maintaining scroll functionality */
     main {
         overflow-y: auto !important;
         height: 100vh;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
     
-    /* Hide scrollbar for Webkit browsers */
     main::-webkit-scrollbar {
         display: none;
     }
     
-    /* Disable any scroll-locking behavior on vision page */
     .vision-page main {
         overflow-y: auto !important;
         scrollbar-width: none;
@@ -215,34 +290,33 @@
 
 /* Hide scrollbars on all screen sizes while maintaining functionality */
 main {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 main::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
 }
 
-/* Ensure desktop doesn't need scrolling - Lock it tight */
+/* Desktop scroll lock */
 @media (min-width: 769px) and (min-aspect-ratio: 16/10) {
     .vision-container {
         height: 100vh;
-        overflow: hidden; /* Prevent any overflow on desktop */
+        overflow: hidden;
         justify-content: center;
-        padding-bottom: 40px; /* Tighter bottom padding */
+        padding-bottom: clamp(30px, 3vw, 50px);
     }
     
     .vision-section {
-        margin-bottom: 35px; /* Reduced margin between sections */
+        margin-bottom: clamp(30px, 4vw, 50px);
     }
     
     .vision-section:last-child {
-        margin-bottom: 0; /* Remove bottom margin from last section */
+        margin-bottom: 0;
     }
     
-    /* Lock the main container on desktop */
     main {
-        overflow: hidden !important; /* Completely lock scrolling on desktop */
+        overflow: hidden !important;
     }
 }
 

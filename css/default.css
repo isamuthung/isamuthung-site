@@ -201,7 +201,7 @@ main {
     margin-bottom: 0;
 }
 
-/* Enhanced navigation links */
+/* Enhanced navigation links - UPDATED */
 .nav-links {
     font-size: var(--nav-link-size);
     font-weight: 300;
@@ -217,12 +217,19 @@ main {
 
 .nav-links li {
     margin-bottom: clamp(10px, 2vh, 20px);
+    display: flex;
+    align-items: center; /* Ensure all li elements align their content to center */
 }
 
 .nav-links li.nav-dot {
     font-size: var(--nav-link-size);
     opacity: 0.5;
     margin: 0 clamp(4px, 0.8vw, 8px);
+    margin-bottom: clamp(10px, 2vh, 20px) !important; /* Match other li elements */
+    display: flex !important;
+    align-items: center !important;
+    line-height: 1;
+    justify-content: center; /* Center the dot horizontally too */
 }
 
 .nav-links a {
@@ -255,6 +262,26 @@ main {
     width: 100%;
 }
 
+/* RESPONSIVE OVERRIDES - Make sure dots stay centered on all screen sizes */
+@media (max-width: 768px) {
+    .nav-links li {
+        margin-bottom: clamp(8px, 1.5vh, 12px);
+    }
+    
+    .nav-links li.nav-dot {
+        margin-bottom: clamp(8px, 1.5vh, 12px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links li {
+        margin-bottom: clamp(8px, 1.5vh, 12px);
+    }
+    
+    .nav-links li.nav-dot {
+        margin-bottom: clamp(8px, 1.5vh, 12px) !important;
+    }
+}
 /* Enhanced contact link section */
 .sidebar-contact {
     display: flex;
@@ -346,7 +373,7 @@ main {
         --sidebar-desc-size: clamp(2.5rem, 3.5vw, 4rem);
         --contact-link-size: clamp(2.2rem, 3vw, 3.2rem);
         --nav-link-size: clamp(1.2rem, 1.8vw, 1.8rem);
-        --sidebar-content-width: clamp(700px, 58vw, 1000px);
+        --sidebar-content-width: clamp(700px, 58vw, 10000px);
     }
     
     .sidebar {
@@ -365,7 +392,7 @@ main {
         --sidebar-desc-size: clamp(2.2rem, 3.5vw, 3.2rem);
         --contact-link-size: clamp(1.9rem, 3vw, 2.6rem);
         --nav-link-size: clamp(1.1rem, 1.8vw, 1.5rem);
-        --sidebar-content-width: clamp(450px, 45vw, 650px);
+        --sidebar-content-width: clamp(450px, 45vw, 6500px);
     }
     
     .sidebar {
