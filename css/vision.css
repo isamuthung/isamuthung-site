@@ -1,12 +1,12 @@
 /* Vision Page Specific Styles */
-
 .vision-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 60px 40px;
+    height: 100vh; /* Keep height for desktop centering */
+    min-height: 100vh; /* Allow expansion on mobile */
+    padding: 0px 40px;
     max-width: 1000px;
     margin: 0 auto;
     opacity: 0;
@@ -125,7 +125,10 @@
 @media (max-width: 768px) {
     .vision-container {
         padding: 50px 30px;
-        height: 100vh;
+        height: auto; /* Allow natural height on mobile */
+        min-height: 100vh;
+        justify-content: flex-start; /* Allow content to flow naturally */
+        padding-top: 80px; /* Add more top padding to account for sidebar */
     }
     
     .vision-header {
@@ -145,38 +148,102 @@
     .vision-section:hover {
         transform: none;
     }
+    
+    .vision-container:hover .vision-section:not(:hover) {
+        opacity: 1; /* Reset hover opacity changes on mobile */
+    }
 }
 
 @media (max-width: 480px) {
     .vision-container {
         padding: 40px 20px;
+        padding-top: 70px; /* Ensure content doesn't get hidden behind sidebar */
+        justify-content: flex-start;
     }
     
     .vision-header {
         font-size: 1.4rem;
+        margin-bottom: 15px;
     }
     
     .vision-text {
         font-size: 0.9rem;
+        line-height: 1.4;
     }
     
     .vision-section {
         margin-bottom: 35px;
     }
+    
+    /* Ensure last section has bottom margin for scrolling */
+    .vision-section:last-child {
+        margin-bottom: 50px;
+    }
 }
 
-/* Ensure main content doesn't interfere with sidebar */
-.main-content {
-    overflow: hidden;
+/* Additional mobile-specific fixes */
+@media (max-width: 768px) {
+    /* Hide scrollbars while maintaining scroll functionality */
+    main {
+        overflow-y: auto !important;
+        height: 100vh;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    
+    /* Hide scrollbar for Webkit browsers */
+    main::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Disable any scroll-locking behavior on vision page */
+    .vision-page main {
+        overflow-y: auto !important;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .vision-page main::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .vision-page body {
+        overflow: visible !important;
+    }
 }
 
-/* Disable pointer events during animations */
-.vision-container.animating {
-    pointer-events: none;
+/* Hide scrollbars on all screen sizes while maintaining functionality */
+main {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
 }
 
-.vision-container.animating * {
-    pointer-events: none;
+main::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Ensure desktop doesn't need scrolling - Lock it tight */
+@media (min-width: 769px) and (min-aspect-ratio: 16/10) {
+    .vision-container {
+        height: 100vh;
+        overflow: hidden; /* Prevent any overflow on desktop */
+        justify-content: center;
+        padding-bottom: 40px; /* Tighter bottom padding */
+    }
+    
+    .vision-section {
+        margin-bottom: 35px; /* Reduced margin between sections */
+    }
+    
+    .vision-section:last-child {
+        margin-bottom: 0; /* Remove bottom margin from last section */
+    }
+    
+    /* Lock the main container on desktop */
+    main {
+        overflow: hidden !important; /* Completely lock scrolling on desktop */
+    }
 }
 
 /* Word animation effect */

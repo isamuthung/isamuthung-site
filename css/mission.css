@@ -1,42 +1,49 @@
-:root {
-    --primary-bg-color: #1a1a1a;
-    --primary-text-color: #ffffff;
-    --secondary-text-color: #333333;
-    --accent-color: #ffffff;
-    --transition-speed: 0.3s;
-    --contact-link-font: 'Playfair Display', cursive;
-    --contact-link-color: #f4f4f4;
-    --contact-link-hover-color: #ffffff;
-    --sidebar-width: 80px;
+/* ===== MISSION PAGE SPECIFIC STYLES ===== */
+/* This file contains only mission page specific styles */
+/* Sidebar and navigation styles are handled by DefaultCSS */
+
+/* Mission Page Layout */
+.mission-page {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(20px, 5vw, 40px);
+    background-color: #ffffff;
 }
 
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.mission-container {
+    max-width: min(650px, 90vw);
+    width: 100%;
+    text-align: center;
+    animation: fadeInItem 0.6s ease-out forwards;
+    padding: 0 clamp(10px, 3vw, 20px);
 }
 
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+/* Mission Question Styling */
+.mission-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    margin-bottom: clamp(30px, 8vw, 60px);
+    line-height: clamp(1.3, 1.4, 1.5);
+    letter-spacing: -0.5px;
 }
 
-body {
+/* Mission Answer Styling */
+.mission-answer {
     font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    font-weight: 300;
+    color: #333333;
+    line-height: clamp(1.6, 1.7, 1.8);
+    max-width: min(600px, 85vw);
+    margin: 0 auto;
 }
 
-body.scroll-locked {
-    overflow: hidden !important;
-}
-
-.scroll-locked main {
-    overflow: hidden !important;
-    height: 100vh;
-}
-
-/* Animations (general purpose) */
+/* Animation for mission content */
 @keyframes fadeInItem {
     from {
         opacity: 0;
@@ -48,364 +55,127 @@ body.scroll-locked {
     }
 }
 
-/* Vertical bar */
-.vertical-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--sidebar-width);
-    height: 100vh;
-    background-color: var(--primary-bg-color);
-    z-index: 1000;
-    transition: width var(--transition-speed) ease;
-}
+/* ===== RESPONSIVE DESIGN FOR MISSION PAGE ===== */
 
-/* Sidebar toggle button */
-.sidebar-toggle {
-    position: absolute;
-    top: 30px;
-    left: 22px;
-    width: 36px;
-    height: 30px;
-    cursor: pointer;
-    z-index: 1100;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.toggle-icon {
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-text-color);
-    transition: all var(--transition-speed) ease;
-}
-
-.sidebar-toggle.active .toggle-icon:nth-child(1) {
-    transform: translateY(14px) rotate(45deg);
-}
-.sidebar-toggle.active .toggle-icon:nth-child(2) {
-    opacity: 0;
-}
-.sidebar-toggle.active .toggle-icon:nth-child(3) {
-    transform: translateY(-14px) rotate(-45deg);
-}
-
-/* Sidebar */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: var(--sidebar-width);
-    width: calc(70vw - var(--sidebar-width));
-    height: 100vh;
-    background-color: var(--primary-bg-color);
-    color: var(--primary-text-color);
-    z-index: 990;
-    transform: translateX(-100%);
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    overflow-y: auto;
-    padding: 33px 80px 40px 40px;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar.active {
-    transform: translateX(0);
-}
-
-/* Navigation Links */
-.nav-links {
-    font-size: 1.2rem;
-    font-weight: 300;
-    font-family: 'Montserrat', sans-serif;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 0;
-}
-
-.nav-links li {
-    margin-right: 10px;
-    margin-bottom: 15px;
-}
-
-.nav-links li.nav-dot {
-    font-size: 1.2rem;
-    opacity: 0.5;
-}
-
-.nav-links a {
-    color: var(--primary-text-color);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 300;
-    position: relative;
-    display: inline-block;
-    transition: opacity var(--transition-speed) ease;
-}
-
-.nav-links a:hover {
-    opacity: 0.7;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--primary-text-color);
-    transition: width var(--transition-speed) ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-/* Sidebar content */
-.sidebar-content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    min-height: 0;
-    padding-right: 20px;
-    justify-content: flex-start;
-}
-
-.sidebar-text-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    max-width: 700px;
-    height: 100%;
-}
-
-.sidebar-description {
-    font-family: 'Playfair Display', serif;
-    font-style: normal;
-    font-size: 2.4rem;
-    line-height: 1.35;
-    color: var(--primary-text-color);
-    text-align: left;
-    margin-top: 3%;
-    margin-bottom: 35px;
-    flex-grow: 1;
-}
-
-.intro-text {
-    margin-bottom: 15px;
-}
-
-.mission-text {
-    margin-bottom: 0;
-}
-
-.sidebar-contact {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    margin-top: auto;
-    flex-shrink: 0;
-}
-
-.contact-link {
-    text-decoration: none;
-    color: var(--contact-link-color);
-    font-family: var(--contact-link-font);
-    font-size: 2.2rem;
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    position: relative;
-    opacity: 0.85;
-}
-
-.contact-link:hover {
-    color: var(--contact-link-hover-color);
-    opacity: 1;
-}
-
-.contact-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--contact-link-color);
-    transition: width 0.3s ease;
-}
-
-.contact-link:hover::after {
-    width: 100%;
-}
-
-/* Overlay */
-.content-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 980;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
-}
-
-.content-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Responsive Sidebar Adjustments */
-@media (max-width: 1024px) {
-    :root {
-        --sidebar-width: 60px;
-    }
-
-    .sidebar {
-        width: calc(85vw - 60px);
-        padding: 33px 30px 40px 10px;
-    }
-
-    .sidebar-description {
-        font-size: 1.7rem;
-        margin-bottom: 15px;
-        line-height: 1.3;
-    }
-
-    .contact-link {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        width: calc(75vw - var(--sidebar-width));
-        padding: 33px 15px 40px 15px;
-    }
-
-    .sidebar-description {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        line-height: 1.25;
-    }
-
-    .nav-links a {
-        font-size: 1.2rem;
-    }
-
-    .sidebar-contact {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .contact-link {
-        font-size: 1.3rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .sidebar {
-        width: calc(70vw - var(--sidebar-width));
-        padding: 33px 10px 40px 10px;
-    }
-
-    .sidebar-description {
-        font-size: 1rem;
-        margin-bottom: 8px;
-        line-height: 1.2;
-    }
-
-    .contact-link {
-        font-size: 1.2rem;
-    }
-}
-
-/* Mission Page Styles */
-.mission-page {
-    margin-left: var(--sidebar-width);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    background-color: #ffffff;
-}
-
-.mission-container {
-    max-width: 650px;
-    width: 100%;
-    text-align: center;
-    animation: fadeInItem 0.6s ease-out forwards;
-    padding: 0 10px;
-}
-
-.mission-question {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    font-weight: 400;
-    color: #1a1a1a;
-    margin-bottom: 60px;
-    line-height: 1.4;
-    letter-spacing: -0.5px;
-}
-
-.mission-answer {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: #333333;
-    line-height: 1.7;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
+/* Large tablets and small desktops */
 @media (max-width: 1024px) {
     .mission-page {
-        margin-left: 60px;
-        padding: 50px 20px;
+        margin-left: 60px; /* Match DefaultCSS sidebar width */
+        padding: clamp(30px, 6vw, 50px) clamp(20px, 4vw, 40px);
     }
 
     .mission-container {
-        padding: 0 60px;
+        padding: 0 clamp(20px, 5vw, 60px);
     }
 
     .mission-question {
-        font-size: 2.1rem;
-        margin-bottom: 45px;
+        font-size: clamp(1.7rem, 4vw, 2.1rem);
+        margin-bottom: clamp(25px, 6vw, 45px);
     }
 
     .mission-answer {
-        font-size: 1rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        line-height: clamp(1.6, 1.65, 1.7);
     }
 }
 
+/* Tablets */
 @media (max-width: 768px) {
+    .mission-page {
+        margin-left: 50px; /* Match DefaultCSS sidebar width */
+        padding: clamp(25px, 5vw, 40px) clamp(15px, 3vw, 25px);
+    }
+
     .mission-container {
-        padding: 0 40px;
+        padding: 0 clamp(15px, 4vw, 40px);
     }
 
     .mission-question {
-        font-size: 1.8rem;
-        margin-bottom: 35px;
+        font-size: clamp(1.5rem, 4.5vw, 1.8rem);
+        margin-bottom: clamp(20px, 5vw, 35px);
+        line-height: 1.35;
     }
 
     .mission-answer {
-        font-size: 0.95rem;
-        line-height: 1.6;
+        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+        line-height: clamp(1.55, 1.6, 1.65);
+        max-width: min(550px, 90vw);
     }
 }
 
+/* Mobile phones */
 @media (max-width: 480px) {
+    .mission-page {
+        margin-left: 45px; /* Match DefaultCSS sidebar width */
+        padding: clamp(20px, 4vw, 30px) clamp(10px, 2vw, 20px);
+    }
+
     .mission-container {
-        padding: 0 20px;
+        padding: 0 clamp(10px, 3vw, 20px);
+        max-width: 95vw;
+    }
+
+    .mission-question {
+        font-size: clamp(1.3rem, 5vw, 1.6rem);
+        margin-bottom: clamp(15px, 4vw, 25px);
+        line-height: 1.3;
+        letter-spacing: -0.3px;
+    }
+
+    .mission-answer {
+        font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+        line-height: clamp(1.5, 1.55, 1.6);
+        max-width: min(500px, 95vw);
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .mission-page {
+        margin-left: 40px; /* Match DefaultCSS sidebar width */
+        padding: clamp(15px, 3vw, 25px) clamp(8px, 1.5vw, 15px);
+    }
+
+    .mission-container {
+        padding: 0 clamp(8px, 2vw, 15px);
+        max-width: 98vw;
+    }
+
+    .mission-question {
+        font-size: clamp(1.2rem, 5.5vw, 1.4rem);
+        margin-bottom: clamp(12px, 3vw, 20px);
+        line-height: 1.25;
+        letter-spacing: -0.2px;
+    }
+
+    .mission-answer {
+        font-size: clamp(0.75rem, 2.8vw, 0.85rem);
+        line-height: clamp(1.45, 1.5, 1.55);
+        max-width: min(450px, 98vw);
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .mission-page {
+        padding: clamp(15px, 3vh, 25px) clamp(20px, 4vw, 40px);
+    }
+
+    .mission-question {
+        margin-bottom: clamp(15px, 4vh, 30px);
+    }
+}
+
+/* High DPI display adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .mission-question {
+        font-weight: 400; /* Ensure font weight is appropriate for high DPI */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .mission-answer {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
