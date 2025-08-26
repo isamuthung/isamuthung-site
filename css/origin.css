@@ -4,7 +4,6 @@ body, html {
     height: auto !important;
     
     /* Hide scrollbars but allow scrolling */
-    scrollbar-width: none !important; /* Firefox */
     -ms-overflow-style: none !important; /* Internet Explorer 10+ */
 }
 

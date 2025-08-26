@@ -26,7 +26,7 @@
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 4.5rem;
+    font-size: clamp(1.8rem, 4vw + 1rem, 6rem);
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
@@ -104,10 +104,10 @@
     margin-top: 2rem;
 }
 
-/* Typography */
+/* Typography with responsive scaling */
 .content-section p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.1rem, 0.8vw + 0.5rem, 1.4rem) !important;
     font-weight: 400;
     line-height: 1.8;
     margin-bottom: 1.5rem;
@@ -115,7 +115,7 @@
 }
 
 .opening-paragraph {
-    font-size: 1rem !important;
+    font-size: clamp(0.1rem, 0.8vw + 0.5rem, 1.4rem) !important;
     font-weight: 400;
     line-height: 1.9;
     color: #2c2c2c;
@@ -123,7 +123,7 @@
 }
 
 .closing-paragraph {
-    font-size: 1.2rem !important;
+    font-size: clamp(0.1rem, 0.8vw + 0.5rem, 1.4rem) !important;
     font-weight: 500;
     font-style: italic;
     text-align: center;
@@ -138,11 +138,8 @@
     border-top: 1px solid #eaeaea;
 }
 
-/* Emphasis */
-em {
-}
 
-/* Photo Containers - Base Styles */
+/* Photo Containers - Base Styles with responsive sizing */
 .photo-container {
     margin: 2rem 0;
     clear: both;
@@ -151,14 +148,14 @@ em {
 /* Vertical/Portrait Images - Float and integrate with text */
 .photo-container[data-orientation="vertical"] {
     float: left;
-    width: 320px;
-    margin: 0.5rem 2rem 1.5rem 0;
+    width: clamp(280px, 25vw, 380px);
+    margin: 0.5rem clamp(1.5rem, 2vw, 3rem) 1.5rem 0;
     clear: none;
 }
 
 .photo-container[data-orientation="vertical"]:nth-of-type(even) {
     float: right;
-    margin: 0.5rem 0 1.5rem 2rem;
+    margin: 0.5rem 0 1.5rem clamp(1.5rem, 2vw, 3rem);
 }
 
 /* Horizontal/Landscape Images - Full width with spacing */
@@ -179,7 +176,7 @@ em {
     clear: both;
 }
 
-/* Photo Placeholders */
+/* Photo Placeholders with responsive sizing */
 .photo-placeholder {
     width: 100%;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -192,13 +189,12 @@ em {
     border-radius: 8px;
 }
 
-/* Vertical image placeholder - FIXED RESOLUTION ISSUE */
+/* Vertical image placeholder - responsive height */
 .photo-container[data-orientation="vertical"] .photo-placeholder {
-    height: 400px;
+    height: clamp(350px, 30vw, 500px);
     aspect-ratio: 3/4;
-    /* Fix for resolution issue */
-    min-height: 400px;
-    min-width: 300px;
+    min-height: 350px;
+    min-width: 280px;
 }
 
 .photo-container[data-orientation="vertical"] .photo-placeholder img {
@@ -208,18 +204,18 @@ em {
     min-height: 100%;
 }
 
-/* Horizontal image placeholder */
+/* Horizontal image placeholder - responsive height */
 .photo-container[data-orientation="horizontal"] .photo-placeholder {
-    height: 400px;
+    height: clamp(300px, 35vw, 550px);
     aspect-ratio: 4/3;
-    min-height: 400px;
+    min-height: 300px;
 }
 
-/* Default placeholder (horizontal) */
+/* Default placeholder (horizontal) - responsive height */
 .photo-container:not([data-orientation]) .photo-placeholder {
-    height: 400px;
+    height: clamp(300px, 35vw, 550px);
     aspect-ratio: 4/3;
-    min-height: 400px;
+    min-height: 300px;
 }
 
 .photo-placeholder:hover {
@@ -229,18 +225,18 @@ em {
 
 .photo-label {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 1.3vw + 0.5rem, 1.6rem);
     font-weight: 500;
     color: #6c757d;
     z-index: 1;
     position: relative;
 }
 
-/* Photo Captions - Always centered for vertical images */
+/* Photo Captions - Always centered for vertical images with responsive text */
 .photo-caption {
     margin-top: 0.75rem;
     font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1vw + 0.4rem, 1.2rem);
     font-weight: 400;
     color: #666666;
     font-style: italic;
@@ -256,7 +252,7 @@ em {
     margin-right: auto;
 }
 
-/* YouTube Video Container Styles */
+/* YouTube Video Container Styles with responsive sizing */
 .video-container {
     margin: 3rem 0;
     clear: both;
@@ -275,6 +271,7 @@ em {
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
+    max-height: clamp(300px, 40vw, 600px);
 }
 
 .video-wrapper:hover {
@@ -293,11 +290,11 @@ em {
     border-radius: 8px;
 }
 
-/* Video Captions */
+/* Video Captions with responsive text */
 .video-caption {
     margin-top: 0.75rem;
     font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1vw + 0.4rem, 1.2rem);
     font-weight: 400;
     color: #666666;
     font-style: italic;
@@ -315,20 +312,66 @@ em {
     clear: both;
 }
 
-/* Responsive Design */
+/* Large Desktop Responsive Design (1440px and up) */
+@media (min-width: 1440px) {
+    .project-content {
+        max-width: clamp(800px, 60vw, 1200px);
+        padding: 0 clamp(40px, 4vw, 80px) 60px clamp(40px, 4vw, 80px);
+    }
+    
+    .hero-section {
+        padding: clamp(80px, 8vw, 120px) 0 clamp(60px, 6vw, 100px) 0;
+    }
+    
+    .photo-container[data-orientation="vertical"] {
+        width: clamp(320px, 28vw, 450px);
+        margin-right: clamp(2rem, 3vw, 4rem);
+        margin-left: clamp(2rem, 3vw, 4rem);
+    }
+}
+
+/* Ultra-wide screens (1920px and up) */
+@media (min-width: 1920px) {
+    .project-content {
+        max-width: clamp(1000px, 55vw, 1400px);
+    }
+}
+
+/* Standard Desktop Responsive Design */
+@media (max-width: 1439px) and (min-width: 1025px) {
+    .project-content {
+        padding: 0 clamp(30px, 3vw, 50px) 60px clamp(30px, 3vw, 50px);
+    }
+    
+    .photo-container[data-orientation="vertical"] {
+        width: clamp(300px, 26vw, 350px);
+        margin-right: clamp(1.5rem, 2.5vw, 2.5rem);
+        margin-left: clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+}
+
 @media (max-width: 1024px) {
     .project-content {
         padding: 0 30px 60px 30px;
     }
     
     .hero-title {
-        font-size: 3.8rem;
+        font-size: clamp(2.8rem, 4.5vw + 0.5rem, 4.5rem);
     }
     
     .photo-container[data-orientation="vertical"] {
         width: 300px;
         margin-right: 1.5rem;
         margin-left: 1.5rem;
+    }
+    
+    .content-section p,
+    .opening-paragraph {
+        font-size: clamp(1rem, 1.1vw + 0.5rem, 1.3rem) !important;
+    }
+    
+    .closing-paragraph {
+        font-size: clamp(1.2rem, 1.4vw + 0.6rem, 1.6rem) !important;
     }
 }
 
@@ -343,18 +386,18 @@ em {
     }
     
     .hero-title {
-        font-size: 3.2rem;
+        font-size: clamp(2.4rem, 6vw + 0.5rem, 3.2rem);
         letter-spacing: -0.5px;
     }
     
     .content-section p,
     .opening-paragraph {
-        font-size: 1.05rem !important;
+        font-size: clamp(1rem, 2vw + 0.7rem, 1.15rem) !important;
         line-height: 1.7;
     }
     
     .closing-paragraph {
-        font-size: 1.1rem !important;
+        font-size: clamp(1.1rem, 2.5vw + 0.8rem, 1.3rem) !important;
     }
     
     /* Mobile: All images become full width */
@@ -369,16 +412,16 @@ em {
     }
     
     .photo-container[data-orientation="vertical"] .photo-placeholder {
-        height: 350px;
+        height: clamp(300px, 45vw, 400px);
         aspect-ratio: 3/4;
-        min-height: 350px;
+        min-height: 300px;
     }
     
     .photo-container[data-orientation="horizontal"] .photo-placeholder,
     .photo-container:not([data-orientation]) .photo-placeholder {
-        height: 280px;
+        height: clamp(250px, 40vw, 350px);
         aspect-ratio: 4/3;
-        min-height: 280px;
+        min-height: 250px;
     }
     
     .content-section {
@@ -389,26 +432,40 @@ em {
     .video-container {
         margin: 2rem 0;
     }
+    
+    .photo-caption,
+    .video-caption {
+        font-size: clamp(0.8rem, 1.8vw + 0.4rem, 1rem);
+    }
 }
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 2.8rem;
+        font-size: clamp(2rem, 8vw + 0.5rem, 2.8rem);
     }
     
     .project-content {
         padding: 0 15px 40px 15px;
     }
     
+    .content-section p,
+    .opening-paragraph {
+        font-size: clamp(0.95rem, 3vw + 0.6rem, 1.1rem) !important;
+    }
+    
+    .closing-paragraph {
+        font-size: clamp(1.05rem, 3.5vw + 0.7rem, 1.25rem) !important;
+    }
+    
     .photo-container[data-orientation="vertical"] .photo-placeholder {
-        height: 300px;
-        min-height: 300px;
+        height: clamp(250px, 50vw, 350px);
+        min-height: 250px;
     }
     
     .photo-container[data-orientation="horizontal"] .photo-placeholder,
     .photo-container:not([data-orientation]) .photo-placeholder {
-        height: 240px;
-        min-height: 240px;
+        height: clamp(200px, 45vw, 300px);
+        min-height: 200px;
     }
     
     .video-wrapper {
@@ -417,6 +474,11 @@ em {
     
     .video-wrapper iframe {
         border-radius: 6px;
+    }
+    
+    .photo-caption,
+    .video-caption {
+        font-size: clamp(0.75rem, 2.5vw + 0.3rem, 0.95rem);
     }
 }
 
@@ -430,6 +492,16 @@ em {
     
     .hero-title {
         color: #000;
+        font-size: 3rem;
+    }
+    
+    .content-section p,
+    .opening-paragraph {
+        font-size: 1rem !important;
+    }
+    
+    .closing-paragraph {
+        font-size: 1.2rem !important;
     }
     
     .video-wrapper {
